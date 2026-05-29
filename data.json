@@ -1,0 +1,902 @@
+{
+  "heroProjects": {
+    "upcoming": [
+      {
+        "title": "anandham flats",
+        "desc": "radio residency show for kissa in-store radio curated by antariksh records",
+        "category": "radio residency"
+      }
+    ],
+    "current": [
+      {
+        "title": "hypnagōgos",
+        "desc": "sleep concert series inquiring the influence of music in dreams",
+        "category": "performance"
+      }
+    ],
+    "recent": [
+      {
+        "title": "unearthing echologies",
+        "desc": "workshop on acoustic ecologies and speculative radio at kiran nadar museum of art",
+        "category": "workshop"
+      }
+    ]
+  },
+  "work": [
+    {
+      "year": "2026",
+      "title": "mapping dissonance",
+      "org": "Akademie Schloss Solitude / Polymorphic Futures",
+      "location": "Online / Stuttgart, Germany",
+      "categories": [
+        "research",
+        "web-residency"
+      ],
+      "shortDesc": "Research fellowship exploring aural dissonance in natural landscapes.",
+      "fullDesc": "<p>Mapping Dissonance is a digital community dedicated to archiving the fading soundscapes of the Global South. Inspired by the accelerated developments in Delhi and Chennai, the project extends its focus to rural and suburban spaces where urbanization is aggressively erasing natural habitats.</p>\n<br></br>\n<p>The platform functions as a digital memorial of an ephemeral ecology, inviting participants to document these environments through sound, video, and personal stories.</p>\n<br></br>\n<p>This project aims to create a deep, interpersonal connection to the land, even for those engaging digitally from afar. Through the residency, beatnyk’s objective is to develop an ecosystem built on shared collective responsibility. This ensures that the burden of preservation does not fall solely on the locals.</p>\n<br></br>\n<p>By using smart contracts to validate both recording and witnessing, the project creates a global network where everyone is equally responsible for protecting our ecological history.</p>\n<br></br>\n<p>Mapping Dissonance will be realized as a browser-based decentralized application (dApp) built entirely with FOSS tools. It features an accessible, interactive map for archiving geo-located soundscapes, governed by transparent smart contracts on a low-energy blockchain. Crucially, the platform integrates a system that sonifies the archive’s data into a real-time digital memorial. All source code and documentation will be open source, to foster community replication.</p>",
+      "link": "https://webresidencies.akademie-solitude.de/mapping-dissonance/",
+      "media": [
+        {
+          "type": "image",
+          "url": "media/aravalliatlas_hp.jpg"
+        },
+        {
+          "type": "image",
+          "url": "media/aravalliatlas_sound.jpg"
+        },
+        {
+          "type": "image",
+          "url": "media/aravalliatlas_story.jpg"
+        }
+      ],
+      "events": []
+    },
+    {
+      "year": "ongoing",
+      "title": "hypnagōgos",
+      "org": "independent",
+      "location": "Multiple",
+      "categories": [
+        "performance"
+      ],
+      "shortDesc": "Sleep concert series inspired by Carl Jung's dream psychology.",
+      "fullDesc": "<p>Hypnagōgos is an ongoing series of sleep concerts. Participants are invited to drift between wakefulness and sleep while immersed in generative ambient textures.</p>",
+      "link": "",
+      "media": [],
+      "events": []
+    },
+    {
+      "year": "ongoing",
+      "title": "agents of malarkey",
+      "org": "independent",
+      "location": "New Delhi, India",
+      "categories": [
+        "performance",
+        "installation",
+        "exhibition",
+        "collaboration"
+      ],
+      "shortDesc": "Interactive installation and performance art piece.",
+      "fullDesc": "<p>agents of malarkey is a performative project done in collaboration with visual aritst Anish Cherian. The project explores speculative research, sonic world-building, and absurdity. The project blends poetic narratives, experimental visuals, and soundscapes to explore bizarre elements, often featuring performances, readings, soundwalks and workshops focusing on noise and non-human narratives in landscapes. </p>",
+      "link": "https://agents-of-malarkey.vercel.app/",
+      "media": [
+        {
+          "type": "image",
+          "url": "media/malarkey/03.png"
+        },
+        {
+          "type": "image",
+          "url": "media/malarkey/01.jpg"
+        },
+        {
+          "type": "image",
+          "url": "media/malarkey/02.jpg"
+        },
+        {
+          "type": "video",
+          "url": "https://www.youtube.com/embed/LX96M70ub3s"
+        }
+      ],
+      "events": [
+        {
+          "title": "where trees lament over our malarkey",
+          "year": "2025",
+          "place": "Delhi, India",
+          "org": "Goethe Institut / FICA",
+          "media": []
+        }
+      ]
+    },
+    {
+      "year": "2025",
+      "title": "kibitzer",
+      "org": "St+art India / Asian Paints",
+      "location": "Kolkata, India",
+      "categories": [
+        "installation",
+        "exhibition",
+        "collaboration",
+        "festival",
+        "research",
+        "sound-design"
+      ],
+      "shortDesc": "An installation at St+art Kolkata reimagining street chess and traditional social gatherings through tactile objects and layered soundscapes.",
+      "fullDesc": "<p>Working on Kibitzer for the St+art Kolkata 2025–26 festival at TRI Art & Culture provided a direct opportunity to bridge historical network systems with localized social infrastructure. In collaborating with artist Sethuraman, our objective was to deconstruct the familiar dynamics of street chess and the traditional Bengali adda, reinterpreting them not just as social gatherings, but as spaces defined by overlapping, competitive streams of information. The physical installation anchored this concept through handcrafted rock chessboards where customized pawns served as direct acoustic mouthpieces. To engage with the work, visitors had to alter their gallery posture entirely, leaning down into the pieces to intercept the sound.\n\nThe sonic architecture of the room was built as a 5-channel spatialized environment, with each channel delivering a distinct narrative layer to form a cohesive sonic bed. The foundation of the piece grew out of our previous research into the 1880–1881 Liverpool vs. Calcutta telegraph match—the world’s first intercontinental long-distance chess game. I processed the recorded moves of this historical match through a custom Python script, translating the algorithmic data into MIDI signals that played out across the gallery as a rhythmic, structural Morse code.\n\nWoven over this telegraphic baseline were layers of human and cultural friction. One channel carried the intimate history of a personal letter exchanged between seven-time chess champion Qazi Motahar Hossain and the revolutionary poet Kazi Nazrul Islam, recorded for this piece through a recited performance by collaborator Tarif Hasan. This archival layer sat in direct tension with the modern, high-stakes velocity of live audio commentary tracking Grandmaster D. Gukesh’s recent matches, alongside a heavily morphed, unrecognizable audio abstraction sourced from Satyajit Ray’s film Shatranj Ke Khilari. By splitting these elements across five channels, the installation transformed the physical space into a non-linear archive where 19th-century telegraphic constraints, literary correspondence, contemporary tactics, and cinema collided.</p>",
+      "link": "",
+      "media": [
+        {
+          "type": "video",
+          "url": "https://www.youtube.com/embed/crQX5iZ-rCI?si=ZLqhSxQOwe0ypsxU"
+        }
+      ],
+      "events": []
+    },
+    {
+      "year": "2025",
+      "title": "preamble",
+      "org": "Darmstadt Ferienkurse",
+      "location": "Darmstadt, Germany",
+      "categories": [
+        "performance",
+        "music",
+        "residency"
+      ],
+      "shortDesc": "A 32-channel immersive performance, utilizing the 3D Sound Lab of the residency programme.",
+      "fullDesc": "<p> Preamble is an aural conversation – an invitation to listen. Layering ecological sounds, voices, texts, ambient melodies, and ravey rhythms, the piece is shaped live through improvisational coding. At its core are recordings from my work on Palestine, layered with the fading presence of birdsong – a reflection on both political resistance and ecological loss. Near the end, my father’s voice reciting the constitutional preamble offers a moment of quiet clarity – a call for unity and shared responsibility. Preamble explores the interconnectedness of all things: human and non-human, personal and political, sound and silence. It’s an attempt to create an immersive, ever-shifting soundscape..</p>",
+      "link": "https://internationales-musikinstitut.de/en/ferienkurse/reader/sonic-beats/",
+      "media": [],
+      "events": []
+    },
+    {
+      "year": "2025",
+      "title": "sonic writings & soundings",
+      "org": "Darmstadt Ferienkurse",
+      "location": "Darmstadt, Germany",
+      "categories": [
+        "residency"
+      ],
+      "shortDesc": "Experimental electronic music residency.",
+      "fullDesc": "<p>A residency programme at the Darmstadt Ferienkurse focused on experimental electronic music. During this period, the performance piece Preamble was created, utilising the 3D Sound Lab with the guidance of facilitators and mentors AGF and Cedrik.</p>",
+      "link": "",
+      "media": [],
+      "events": []
+    },
+    {
+      "year": "2025",
+      "title": "algorave india: compilation one",
+      "org": "Algorave India",
+      "location": "Online",
+      "categories": [
+        "curation",
+        "music"
+      ],
+      "shortDesc": "Curated compilation of algorithmic art from India.",
+      "fullDesc": "<p>A landmark release featuring 20+ artists from the Indian live coding community.</p>",
+      "link": "",
+      "media": [],
+      "events": []
+    },
+    {
+      "year": "2025",
+      "title": "7th orbit: generative generation",
+      "org": "Algorave India / W.I.P Labs",
+      "location": "Delhi, India",
+      "categories": [
+        "curation"
+      ],
+      "shortDesc": "Curation of Algorave India's seven year anniversary.",
+      "fullDesc": "<p>Curated '7th Orbit: Generative Generation' for Algorave India's seven year anniversary with W.I.P Labs.</p>",
+      "link": "",
+      "media": [],
+      "events": []
+    },
+    {
+      "year": "2025",
+      "title": "xxxi",
+      "org": "Self-Released",
+      "location": "Online",
+      "categories": [
+        "music"
+      ],
+      "shortDesc": "A noisy musical composition exploring music production techniques.",
+      "fullDesc": "<p>A noisy musical composition restarting and continuing the practice of exploring music production techniques.</p>",
+      "link": "",
+      "media": [],
+      "events": []
+    },
+    {
+      "year": "2024",
+      "title": "w.i.p alt.fest 2024",
+      "org": "W.I.P Labs",
+      "location": "Bangalore & Delhi, India",
+      "categories": [
+        "curation",
+        "performance",
+        "festival"
+      ],
+      "shortDesc": "Festival curation and production of music, techart and dance performances.",
+      "fullDesc": "<p>Spearheaded festival curation and production of music, techart, and dance performances across multiple venues in Bangalore and Delhi. Also performed a live coding set at the Algorave edition of the festival.</p>",
+      "link": "",
+      "media": [],
+      "events": []
+    },
+    {
+      "year": "2024",
+      "title": "i am going to the sea, clear the path",
+      "org": "Lahore Biennale Foundation",
+      "location": "Pakistan",
+      "categories": [
+        "installation",
+        "exhibition",
+        "collaboration"
+      ],
+      "shortDesc": "Sound design for Ravi Agarwal’s photographic installation mapping the threatened echolocation systems of Indus and Ganges River dolphins.",
+      "fullDesc": "<p>Working with Ravi Agarwal on “I am going to the sea, clear the path” was an exercise in using sound to talk about environments that are becoming unlivable. The installation, which debuted at the Lahore Biennale in 2024 and was exhibited at Gallery Espace in 2026, focuses on the endangered Indus and Ganges River dolphins. These are ancient, sightless mammals that rely entirely on high-frequency sound to navigate, but their habitats are now fractured by political borders, water treaties, dams, and the constant hum of anthropogenic machinery.</p>\n\n<p>My work involved in designing the sound that plays in the room alongside Ravi’s large printed canvas banners. The audio design needed to be stark but physically present in the space. I took recorded echolocation clicks of the dolphins and layered them against a Persian narration of a 13th-century Rumi verse, which was spoken by Siena Fakhroddin Ghaffari. The technical focus was on how these elements occupied the gallery—letting the high-frequency bursts cut through the silence to mimic how these creatures try to map a river system that human infrastructure has crowded with noise.</p>",
+      "link": "https://raviagarwal.com/works/i-am-going-to-the-sea-clear-the-path",
+      "media": [],
+      "events": []
+    },
+    {
+      "year": "2024",
+      "title": "computational arts",
+      "org": "W.I.P Labs / Goethe Institut",
+      "location": "Delhi, India",
+      "categories": [
+        "performance",
+        "collaboration",
+        "curation",
+        "talk"
+      ],
+      "shortDesc": "Lead curator for a three-day segment of the Portals series at Goethe-Institut New Delhi, organizing workshops and performances centered on creative coding, open-source tools, and modular synthesis.",
+      "fullDesc": "<p>Putting together the September edition of Portals with W.I.P Labs was about setting up a space where people could look at algorithms, machine learning, and audio synthesis not as clinical black boxes, but as highly malleable tools for performance and text. I wanted the programming to move past the sterile buzzwords often attached to tech-art and instead focus on immediate, practical execution. Over three days, the venue became a space for tool-sharing, splitting the schedule between structured learning and real-time improvisation.</p>\n\n<p>The daytime workshops were anchored in accessible, open-source, or low-code frameworks. We had Anurati introduce interactive storytelling using Twine and Bitsy to build non-linear fiction, while Dhruv Saxena ran a session using TouchDesigner and MediaPipe to generate text and geometry through physical gestures. I also made sure we addressed sound structure from the ground up—Vaibhav Batra led a technical walkthrough on Eurorack emulation using VCV Rack to show how to introduce controlled randomness and logic into generative looping sequences. </p>\n\n<p>The evening performances and talks brought those same algorithmic logic systems into live environments. During our Adda talks, AI researcher Manaswi and creative technologist Khoparzi demoed their self-trained machine learning models and TidalCycles workflows, breaking down how they use code to maintain a steady pulse amidst glitch audio data. That technical breakdown translated directly into the live sets, which included a performance where pairs of code-drift attendees built AV patches live from scratch using p5.js and SonicPi, and a closing piece where a movement artist had to physically react to the unexpected, non-repetitive voltage variations of a modular synth. Looking back, the weekend worked because it pulled the technology out of isolated screens and turned it into a shared, collaborative framework.</p>",
+      "link": "",
+      "media": [],
+      "events": []
+    },
+    {
+      "year": "2024",
+      "title": "this is not improvised",
+      "org": "W.I.P Labs / Goethe Institut",
+      "location": "Delhi, India",
+      "categories": [
+        "performance",
+        "curation"
+      ],
+      "shortDesc": "Lead curator for This Is Not Improvised, a collaborative event developed with W.I.P Labs for the Portals program at Goethe-Institut New Delhi.",
+      "fullDesc": "<p>n November 2024, I led the curation for This Is Not Improvised, a program segment presented as part of the Portals series at Goethe-Institut / Max Mueller Bhavan in New Delhi. The event was developed, programmed, and executed in direct collaboration with W.I.P Labs.\n\nMy primary responsibilities encompassed organizing the artist roster and structuring the framework of the event. The two-day curation was organized into three distinct components: a workshop on theatre improvisation, an electronic music improvisation performance, and a live improvised dance performance.</p>",
+      "link": "",
+      "media": [],
+      "events": []
+    },
+    {
+      "year": "2024",
+      "title": "live-coding soundscapes for theatre with orca",
+      "org": "Audio DevCon x India",
+      "location": "India",
+      "categories": [
+        "talk"
+      ],
+      "shortDesc": "A presentation at the Audio Developer Conference (ADCx) India demonstrating the functional application of ORCA for live-coding soundscapes in theatrical performances.",
+      "fullDesc": "<p>In January 2024, I presented a talk at the Audio Developer Conference (ADCx) India detailing the use of ORCA in live theatrical environments. The presentation focused on deploying ORCA, a two-dimensional esoteric programming language, beyond standard generative music applications to function as a real-time performance tool.\n\nI outlined how its visual interface and lack of compilation errors make it highly adaptable for live improvisation. By patching ORCA to audio engines like Ableton or any DAW via MIDI or OSC, it serves to sequence and trigger complex soundscapes. The talk referenced my practical applications of this workflow in productions such as Agents of Malarkey and The Story of Gargalion, and concluded with a direct, from-scratch live-coding demonstration</p>",
+      "link": "",
+      "media": [
+        {
+          "type": "video",
+          "url": "https://www.youtube.com/embed/IK1N5bNFc0I?si=7TYvMY4CIb2ZRo24"
+        }
+      ],
+      "events": []
+    },
+    {
+      "year": "2023",
+      "title": "thinking on thinking",
+      "org": "Independent",
+      "location": "Online",
+      "categories": [
+        "podcast"
+      ],
+      "shortDesc": "Podcast exploring cognitive science and art.",
+      "fullDesc": "<p>A series of conversations with artists and scientists.</p>",
+      "link": "",
+      "media": [],
+      "events": []
+    },
+    {
+      "year": "2023",
+      "title": "free wav 2.0",
+      "org": "Bhoomi Farms",
+      "location": "Attapadi, Kerala, India",
+      "categories": [
+        "residency"
+      ],
+      "shortDesc": "A week-long sonic arts and electronic music residency in the Western Ghats focused on field recording, deep listening, and production.",
+      "fullDesc": "<p>In March 2023, I participated in Free.wav 2.0, a week-long sonic arts and electronic music residency. The program was situated at Bhoomi Farms in the Attapadi hills of Kerala, an isolated environment within the ecosystem of the Western Ghats.\n\nFacilitated by sound artists Nithin Shams and Aditya Kapoor (Flux Vortex), the residency had also invited guest artists including Nicolas Jaar and Bint Mbareh. The format prioritized sound art practices, anchoring the week around deep listening exercises, environmental field recording, digital music production, and collaborative nightly jam sessions.</p>",
+      "link": "https://homegrown.co.in/homegrown-creators/freewav-20-ft-nicolas-jaar-attend-a-week-long-electronic-music-residency-in-kerala",
+      "media": [
+        {
+          "type": "video",
+          "url": "https://www.youtube.com/embed/Q4FlvkV2e3M?si=9nvsj5GAxoezOxBP"
+        }
+      ],
+      "events": []
+    },
+    {
+      "year": "2023",
+      "title": "dawn chorus of delhi",
+      "org": "Norient City Sounds",
+      "location": "Germany",
+      "categories": [
+        "exhibition",
+        "collaboration",
+        "research",
+        "sound-design"
+      ],
+      "shortDesc": "A collaborative sound piece exploring Delhi's dawn chorus and the acoustic contrast between rapid urbanization and surviving biophonic ecologies.",
+      "fullDesc": "<p>The City at Dawn is a collaborative sound piece produced with artist Surbhi Mittal (Pale Blue Dotter) and published as part of the virtual exhibition Norient City Sounds: Delhi curated by Suvani Suri in 2023. The project was a longitudinal inquiry into the soundscape ecologies of New Delhi.\n\nUtilizing field recorders, we documented the dawn choruses across various locations in the city, capturing the stark acoustic contradictions between rapid urban infrastructure development and surviving natural biophony. The final composition stitches together these environmental recordings to highlight the coexistence of anthropogenic noise and non-human sound. By structurally mapping these sonic environments, the piece provides an auditory framework for examining the shifting ecological realities and infrastructural disparities of the city as it wakes up.</p>",
+      "link": "https://norient.com/pale-blue-dotter-beatnyk/city-dawn?special=347",
+      "media": [],
+      "events": []
+    },
+    {
+      "year": "2023",
+      "title": "lohaca ii",
+      "org": "Institute for Art in Public Space Styria",
+      "location": "Austria",
+      "categories": [
+        "collaboration",
+        "installation"
+      ],
+      "shortDesc": "Collaborative sound art project with Anish Cherian and Sujit Mallick.",
+      "fullDesc": "<p>A collaborative sound art project with Anish Cherian and Sujit Mallick for the Institute for Art in Public Space Styria, Austria.</p>",
+      "link": "",
+      "media": [],
+      "events": []
+    },
+    {
+      "year": "2023",
+      "title": "khabar lahariya",
+      "org": "Independent",
+      "location": "India",
+      "categories": [
+        "film",
+        "sound-design"
+      ],
+      "shortDesc": "Sound design and audio post-production for a commissioned promotional showreel documenting the field journalism of Khabar Lahariya.",
+      "fullDesc": "<p>I was commissioned by Chambal Media to execute the sound design and audio mix for the official Khabar Lahariya showreel. The video is an overview of the grassroots news network's operations.</p>",
+      "link": "",
+      "media": [
+        {
+          "type": "video",
+          "url": "https://player.vimeo.com/video/859704393"
+        }
+      ],
+      "events": []
+    },
+    {
+      "year": "2023",
+      "title": "mau: the spirit dreams of cheraw",
+      "org": "Independent",
+      "location": "India",
+      "categories": [
+        "film",
+        "sound-design"
+      ],
+      "shortDesc": "Award-winning sound design and music composition for an independent documentary exploring the cultural and ecological history of the Mizo Cheraw dance.",
+      "fullDesc": "<p>I served as the sound designer and music composer for Mau: The Spirit Dreams of Cheraw (2023), a Mizo-language documentary directed by Shilpika Bordoloi. The film utilizes an ethnographic approach to document the traditional roots of the Cheraw bamboo dance, specifically examining its historical connection to maternal mortality and the 48-year ecological cycle of bamboo flowering in Mizoram. \nI designed the sound and composed the original score. My work was to construct a composition that anchored the film's visual narrative and movement. For my technical and creative execution on this project, I was awarded the accolade for Best Sound Design from Northeast International Documentary and Film Festival.</p>",
+      "link": "https://en.wikipedia.org/wiki/Mau:_The_Spirit_Dreams_of_Cheraw",
+      "media": [
+        {
+          "type": "video",
+          "url": "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/a1tmXeBbBbo?si=j-Geb5UtEQaq5Ql3\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+        }
+      ],
+      "events": [
+        {
+          "title": "International Film Festival of India (Selected for the prestigious Indian Panorama section)",
+          "year": "2023",
+          "place": "Goa, India",
+          "org": "IFFI",
+          "media": []
+        },
+        {
+          "title": "ALT EFF (Alternative Film Festival)",
+          "year": "2023",
+          "place": "Online",
+          "org": "ALT EFF",
+          "media": []
+        },
+        {
+          "title": "International Documentary Short Film Festival Kerala",
+          "year": "2023",
+          "place": "Kochi, India",
+          "org": "IDSFFK",
+          "media": []
+        }
+      ]
+    },
+    {
+      "year": "2023",
+      "title": "biroho",
+      "org": "Independent",
+      "location": "India",
+      "categories": [
+        "film",
+        "theatre",
+        "sound-design"
+      ],
+      "shortDesc": "sound design and music composition for a dance film exploring themes of grief, intergenerational memory, and maternal longing.",
+      "fullDesc": "<p>I worked as the sound designer and music composer for Biroho, an 8-minute dance film directed by Pratik Iyer and Sumedha Bhattacharyya. Developed and executed at AuroApaar's Manifest Dance-Film Incubator in 2022 and released in 2023, the film functions as a physical exploration of grief and the prolonged sense of longing between a dancer and the memory of her grandmother.  My work involved designing the soundscape to support the visual narrative, which utilized Kathak movement vocabulary alongside family archival photographs and written records. The sound design was structured to anchor the performance's emotional transitions—specifically addressing personal and collective loss experienced during the pandemic—while providing an in-situ acoustic environment for Bhattacharyya's choreography.</p>",
+      "link": "https://vedmurarka.com/biroho/",
+      "media": [
+        {
+          "type": "video",
+          "url": "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/650qJZCn_lM?si=8GWXUVj7ghnSA4DB\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" allowfullscreen></iframe>"
+        }
+      ],
+      "events": []
+    },
+    {
+      "year": "2023",
+      "title": "℅:podcast: the care of",
+      "org": "Independent",
+      "location": "Online / Remote",
+      "categories": [
+        "podcast",
+        "sound-design",
+        "publication"
+      ],
+      "shortDesc": "A podcase series exploring the intersection of creative coding, digital communities, and care.",
+      "fullDesc": "<p>I worked as a sound designer, editor and producer for the first season <b>of c/o podcast: the care of</b>, a conversational podcast series hosted by Computational Mama. The project functioned as a direct extension of her pandemic-era \"Coding with Friends\" livestreams, which focused on establishing accessible technical spaces for women and non-binary creators.\n\nThe podcast explored the practical and theoretical applications of care within the creative technology community. Season 1 structured these themes through interviews with practitioners in generative design, mathematics, and education. The guest roster included Dan Shiffman discussing creative coding education; Ilithiya and Eliza from the curiouslyminded collective; Chanda Babel on the mathematics of care; So Sun on generational dynamics in the \"Uljiro Has No Park\" project; Kiel Danger Mutschelknaus on iterative design; and Kate Sicchio exploring the architecture of digital and physical care spaces.</p>",
+      "link": "https://computationalmama.substack.com/",
+      "media": [],
+      "events": []
+    },
+    {
+      "year": "2022",
+      "title": "water nodes",
+      "org": "Goldsmith University",
+      "location": "Global",
+      "categories": [
+        "performance",
+        "collaboration",
+        "web-residency",
+        "sound-design"
+      ],
+      "shortDesc": "Sound design for a hybrid motion-capture performance exploring collective memory, developed during a virtual residency with Goldsmiths, University of London.",
+      "fullDesc": "<p>n 2022, I collaborated as the sound designer for Water Nodes, an immersive hybrid installation and live-remote motion capture performance. The project was developed during a six-month virtual residency based at Goldsmiths, University of London. Utilizing the Goldsmiths Mocap Streamer, the technical infrastructure allowed for live motion capture data to be streamed over the internet, connecting multiple remote locations into a shared digital space.\n\nThe performance, led by creative technologist Joaquina Salgado and choreographers Aabshaar Wakhloo and Sumedha Bhattacharyya, examined the transmission of cross-cultural memory and physical grief. The physical performance space was based at Khuli Khirkee and Studio Sama in New Delhi, featuring live and remote dancers. My work focused on constructing an audio environment capable of synchronizing with the live-streamed motion data, anchoring the dispersed digital interactions within a cohesive sonic framework.</p>",
+      "link": "",
+      "media": [],
+      "events": []
+    },
+    {
+      "year": "2022",
+      "title": "a symphony found in the wilderness of noise",
+      "org": "Serendipity Arts Foundation",
+      "location": "Online",
+      "categories": [
+        "publication"
+      ],
+      "shortDesc": "An essay published by Serendipity Arts exploring the evolution of the Earth's soundscapes and the ecological impact of anthrophonic noise.",
+      "fullDesc": "In 2022, I published an essay titled A Symphony Found in the Wilderness of Noise as part of the Serendipity Arts writing initiatives. The essay traces the trajectory of sound from the theoretical \"Music of Spheres\" and prehistoric geophonics to the contemporary dominance of anthrophonic noise (human-generated sound). It examines how industrialization has disrupted the sonic signatures of the natural world, masking essential acoustic signals and soundmarks. Ultimately, the writing argues for active, conscious listening and planet-driven sonic decisions to reclaim acoustic balance, serving as a textual foundation for my broader sound art practice and environmental field recordings.</p>",
+      "link": "https://serendipityarts.org/writing_initiatives/symphony-found-wilderness",
+      "media": [],
+      "events": []
+    },
+    {
+      "year": "2022",
+      "title": "prowl",
+      "org": "Independent",
+      "location": "India",
+      "categories": [
+        "film",
+        "sound-design"
+      ],
+      "shortDesc": "Sound design for the film Prowl.",
+      "fullDesc": "<p>Executed full sound design for the film 'Prowl', creating a distinctive auditory experience. Screened at the Mobile Dance Film Festival, New York.</p>",
+      "link": "",
+      "media": [],
+      "events": []
+    },
+    {
+      "year": "2022",
+      "title": "melancholiair",
+      "org": "Self-Released",
+      "location": "Online",
+      "categories": [
+        "music"
+      ],
+      "shortDesc": "Original musical composition reflecting on melancholic soundscapes.",
+      "fullDesc": "<p>An original musical composition reflecting on melancholic soundscapes and introspective themes.</p>",
+      "link": "",
+      "media": [],
+      "events": []
+    },
+    {
+      "year": "2021-2023",
+      "title": "whales for climate",
+      "org": "BeFantastic Fellowship / Goethe Institut",
+      "location": "India",
+      "categories": [
+        "collaboration",
+        "fellowship"
+      ],
+      "shortDesc": "A collaborative AR project raising climate awareness, developed during the BeFantastic Together Fellowship.",
+      "fullDesc": "<p>Whale Tales is an interactive audio-visual and augmented reality project developed collaboratively during the BeFantastic Together Fellowship. Operating as part of the Ocean Drifters collective, the project utilizes data-driven storytelling and sound art to communicate the ecological role of whales in carbon sequestration.\n\n<p>My contribution focused on designing the sound to create immersive acoustic environment using whale songs for the readers. These soundscapes integrated with AI-generated visual components created using VQGAN and the fictional narrative developed using GPT1.0.</p>\n<p></p>\n<p>Structured across web-based formats and physical gallery installations, the work was exhibited at the India Art Fair in New Delhi, the Bangalore Literature Festival, and the C3 Open House at Harkat Studios in Mumbai.</p>",
+      "link": "https://befantastic.in/together/whale-tales/",
+      "media": [
+        {
+          "type": "image",
+          "url": "media/whaletale/01.jpg"
+        },
+        {
+          "type": "image",
+          "url": "media/whaletale/02.jpg"
+        },
+        {
+          "type": "image",
+          "url": "media/whaletale/03.jpg"
+        }
+      ],
+      "events": [
+        {
+          "title": "India Art Fair",
+          "year": "2022",
+          "place": "Delhi, India",
+          "org": "BeFantastic",
+          "media": []
+        }
+      ]
+    },
+    {
+      "year": "2021-2022",
+      "title": "internet public radio",
+      "org": "Internet Public Radio",
+      "location": "Online",
+      "categories": [
+        "radio",
+        "curation"
+      ],
+      "shortDesc": "Monthly curated radio show.",
+      "fullDesc": "<p>Produced and curated a monthly radio show for Internet Public Radio.</p>",
+      "link": "",
+      "media": [],
+      "events": []
+    },
+    {
+      "year": "2021",
+      "title": "dastaan live: kabira khada bazaar mein",
+      "org": "Dastaan LIVE",
+      "location": "Delhi, India",
+      "categories": [
+        "sound-design"
+      ],
+      "shortDesc": "Visual design and documentation intern for Dastaan LIVE's rock opera reinterpretation of the 1982 play Kabira Khada Bazaar Mein.",
+      "fullDesc": "<p>I worked as an intern for the Delhi-based art-rock collective Dastaan LIVE, focusing on visual design and documentation. My primary responsibility was documenting the composition and production process for the album and live performance of Kabira Khada Bazaar Mein.\n\nThe project, directed by M.K. Raina and produced by Anirban Ghosh, reinterpreted the original music of Bhisham Sahni's 1982 theatre production into a contemporary rock-opera format. The final production premiered at the Mahindra Kabira Festival in 2021. My documentation captured the mechanical and artistic process of translating archival theatre music into a modern, immersive rock arrangement.</p>",
+      "link": "https://www.instagram.com/dastaanlive/",
+      "media": [
+        {
+          "type": "image",
+          "url": "media/kkbm/03.jpg"
+        },
+        {
+          "type": "image",
+          "url": "media/kkbm/02.jpg"
+        },
+        {
+          "type": "image",
+          "url": "media/kkbm/01.jpeg"
+        },
+        {
+          "type": "image",
+          "url": "media/kkbm/04.jpeg"
+        }
+      ]
+    },
+    {
+      "year": "2021",
+      "title": "cotton clouds",
+      "org": "Self-Released",
+      "location": "Online",
+      "categories": [
+        "music"
+      ],
+      "shortDesc": "Original musical piece focusing on ethereal and soft sound textures.",
+      "fullDesc": "<p>Composed and released 'Cotton Clouds', an original musical piece focusing on ethereal and soft sound textures.</p>",
+      "link": "",
+      "media": [],
+      "events": []
+    },
+    {
+      "year": "2021",
+      "title": "the palanquin of yatudhani",
+      "org": "Independent",
+      "location": "India",
+      "categories": [
+        "theatre",
+        "sound-design"
+      ],
+      "shortDesc": "Sound design for a theatre piece exploring the myth of Pūtanā through layered voice notes, spoken word poetry, and traditional Indian percussion.",
+      "fullDesc": "<p>I produced the sound design and soundscape for The Palanquin of Yatudhani, a theatrical performance examining the myth of Pūtanā and the psychological complexities of the mother-child dynamic. Operating under my artist moniker, beatnyk, I structured the audio environment to reflect the intense cultural and inner conflicts central to the narrative.</p>\n\n<p>The primary soundscape was constructed by assembling a conglomeration of crowd-sourced audio notes—specifically individuals discussing their relationships with their mothers. These documentary recordings were layered with excerpts from Vidur Sethi's poem, Draining of a queer dishwasher. To anchor the spoken-word elements, I integrated the traditional percussive sounds of the chenda, mridangam, and kartal. The resulting audio composition functioned as a direct narrative framework for the seven-person ensemble cast.</p>",
+      "link": "https://soundcloud.com/b3atnyk/the-palanquin-of-yatudhani",
+      "media": []
+    },
+    {
+      "year": "2020-2021",
+      "title": "woodworking apprenticeship",
+      "org": "Studio Clutter",
+      "location": "Goa, India",
+      "categories": [
+        "residency"
+      ],
+      "shortDesc": "A three-month woodworking apprenticeship in Goa focused on custom furniture fabrication and functional design.",
+      "fullDesc": "<p>I did a three-month woodworking apprenticeship at Studio Clutter in Goa, an independent studio practice run by Shailna and Anish. The apprenticeship provided practical, hands-on training in wood fabrication and structural design. My primary responsibility was assisting in the construction of a complete custom furniture set for a commercial Airbnb interior project.</p>\n\n<p>Alongside the primary interior build, I also assisted on smaller bespoke commissions, including custom jewelry boxes for private clients. </p>",
+      "link": "https://www.studioclutter.com/",
+      "media": []
+    },
+    {
+      "year": "2020",
+      "title": "coming out party for the androgynous trees",
+      "org": "Goethe Institut / Max Mueller Bhavan",
+      "location": "Delhi, India",
+      "categories": [
+        "installation",
+        "collaboration",
+        "radio"
+      ],
+      "shortDesc": "A site-specific, GPS-triggered audio installation at Lodi Gardens exploring post-human narratives through localized sound.",
+      "fullDesc": "<p>Coming Out Party for the Androgynous Tree is a site-specific locative audio installation deployed at Lodi Gardens in New Delhi in November 2020. Conceptualized by Anish Cherian, the project utilizes GPS-enabled smartphones and headphones to deliver localized audio based on the listener's physical movement and coordinates within the park.</p>\n\n<p>The installation frames the physical trees as post-human figures—categorized as zoe, whippersnapper, and the animalinside—developed in collaboration with Cherian and Vidur Sethi. The audio release functions to animate these figures, establishing a framework for participants to engage with non-human narratives and environmental data via a digital audio interface.</p>\n\n<p>The project was commissioned under Five Million Incidents, organized by Goethe-Institut / Max Mueller Bhavan New Delhi, and conceived in collaboration with Raqs Media Collective.</p>",
+      "link": "https://www.goethe.de/ins/in/en/kul/art/fmi/aac.html",
+      "media": []
+    },
+    {
+      "year": "2020",
+      "title": "loss of horizon and converging acts",
+      "org": "Goethe Institut / Max Mueller Bhavan",
+      "location": "Delhi, India",
+      "categories": [
+        "collaboration",
+        "podcast",
+        "sound-design",
+        "publication",
+        "radio"
+      ],
+      "shortDesc": "A collaborative audio project documenting the synchronized actions and environmental observations of six geographically separated artists digging holes over ten days.",
+      "fullDesc": "<p>Loss of Horizon & Converging Acts (LoHaCA) is a podcast developed in collaboration with multimedia artist Anish Cherian. The project functions as a digital confluence and audio documentation of six geographically separated artists located across Kashmir, Uttar Pradesh, Karnataka, and Telangana. Over a ten-day period, each artist engaged in the synchronized physical act of digging a hole. During this process, they recorded their direct observations and interactions with non-human elements at their respective sites, including the soil, insects, and tools.</p>\n\n<p>As the sound artist for the project, I structured these recorded environmental interactions into a cohesive podcast format. Processing these specific site-based recordings alongside Cherian significantly informed my ongoing perspective on listening and the mechanics of sound art. The audio piece serves as a framework to connect these isolated acts into a collective experience. LoHaCA was developed within a broader series of interconnected events initiated by artist and organic farmer Sujit Mallick. The work was commissioned as part of Five Million Incidents, organized by Goethe-Institut / Max Mueller Bhavan New Delhi, and conceived in collaboration with Raqs Media Collective.</p>",
+      "link": "https://soundcloud.com/lohaca/sets/lohaca",
+      "media": [
+        {
+          "type": "audio",
+          "url": "https://soundcloud.com/lohaca/sets/lohaca"
+        }
+      ]
+    },
+    {
+      "year": "2020",
+      "title": "synthfarm",
+      "org": "Bagan Farm",
+      "location": "Kolkata, India",
+      "categories": [
+        "residency"
+      ],
+      "shortDesc": "A two-day electronic music retreat focused on synth building and modular synthesis",
+      "fullDesc": "<p>I participated in a two-day retreat at Synthfarm in West Bengal. While the program is formally billed as a residency focused on electronic music and DIY modular sound design, it functioned as an intensive, practical introduction to the mechanics of hardware synthesis. Surrounded by a community of producers and first-time synth builders, it was my initial direct exposure to modular environments and physical synthesizer architecture.</p>",
+      "link": "https://synthfarm.in/",
+      "media": []
+    },
+    {
+      "year": "2020",
+      "title": "march dance",
+      "org": "Basement 21",
+      "location": "Chennai, India",
+      "categories": [
+        "residency"
+      ],
+      "shortDesc": "A week-long intensive exploring movement and theatre improvisation, facilitated by Basement 21 in Chennai.",
+      "fullDesc": "<p>In early 2020, just prior to the pandemic, I attended the March Dance residency at Goethe-Institut / Max Mueller Bhavan in Chennai. Organized by the Basement 21 collective and facilitated by Pravin Kannanur and Maarten Visser, the week-long program focused directly on movement and theatre improvisation. This residency served as my initial exposure to improvisational performance practices outside of a strictly audio context. It provided a functional framework for physical theatre and movement, expanding my technical and artistic vocabulary into embodied, spatial performance.</p>",
+      "link": "https://basement21.wordpress.com/category/collective-works/march-dance/",
+      "media": [
+        {
+          "type": "video",
+          "url": "https://www.youtube.com/embed/il9PAwitVpY?si=PKbrEKvDWUgec2vR"
+        }
+      ],
+      "events": []
+    },
+    {
+      "year": "2020",
+      "title": "rainy summer",
+      "org": "Self-Released",
+      "location": "Online",
+      "categories": [
+        "music"
+      ],
+      "shortDesc": "Original composition exploring atmospheric and seasonal themes.",
+      "fullDesc": "<p>An original musical composition exploring atmospheric and seasonal themes.</p>",
+      "link": "",
+      "media": [],
+      "events": []
+    },
+    {
+      "year": "2020",
+      "title": "flipped mixtape",
+      "org": "Self-Released",
+      "location": "Online",
+      "categories": [
+        "music"
+      ],
+      "shortDesc": "a compilation of artists getting creative with one sample.",
+      "fullDesc": "<p>Curated by Krishnamurthy, a pioneering electronic musician from Chennai, India. The compilation is the result of an online challenge during the pandemic to create a musical track using a single sample selected by Krishnamurthy within 24 hours. </p>",
+      "link": "https://flippedmixtapes.bandcamp.com/album/24hr-sample-flip-challenge-4",
+      "media": []
+    },
+    {
+      "year": "2020",
+      "title": "paper flowers",
+      "org": "Self-Released",
+      "location": "Online",
+      "categories": [
+        "music"
+      ],
+      "shortDesc": "Lofi hiphop",
+      "fullDesc": "<p>A composition using different samples to create a lofi hip-hop track. One of my first releases online.</p>",
+      "link": "https://beatnyk.bandcamp.com/album/paper-flowers-ep",
+      "media": []
+    }
+  ],
+  "lab": [
+    {
+      "year": "2026",
+      "title": "Echoes from Memory",
+      "org": "Museum of Art & Photography",
+      "location": "Bengaluru, India",
+      "categories": [
+        "workshop"
+      ],
+      "shortDesc": "A reflective sound workshop co-facilitated with Nanditi, exploring archives, oral histories, and personal memory to construct a collective soundscape.",
+      "fullDesc": "<p>Co-facilitating this one-day workshop at MAP Bangalore with Nanditi K.—who works with Hindustani ragas and code—was an exercise in understanding how memory can be represented through sound. Pondering upon questions like what makes an archive, what are the different ways in which sound becomes a memory and how can one access or work with it.</p>\n\n<p>During the day, we had the participants listen to archival recordings and oral histories, then move through the museum to collect their own audio fragments, ambient sounds, and spoken reflections. We spent the final part of the workshop bringing these pieces together, layering the raw recordings into a single collective soundscape that mapped out the group's shared presence and overlapping histories in the space.</p>",
+      "link": "",
+      "media": [],
+      "events": []
+    },
+    {
+      "year": "2025",
+      "title": "Generative Soundscapes",
+      "org": "Ambedkar University Delhi",
+      "location": "Delhi, India",
+      "categories": [
+        "Workshop"
+      ],
+      "shortDesc": "Introductory course on generative audio.",
+      "fullDesc": "<p>A 2-day intensive workshop teaching the basics of generative audio using open source tools.</p>",
+      "link": "",
+      "media": [],
+      "events": []
+    },
+    {
+      "year": "2025",
+      "title": "Listening to Where Trees Lament",
+      "org": "Goethe-Institut / FICA",
+      "location": "Delhi, India",
+      "categories": [
+        "Workshop"
+      ],
+      "shortDesc": "Ecological listening workshop.",
+      "fullDesc": "<p>Deep listening sessions conducted in the ridge forests of Delhi.</p>",
+      "link": "",
+      "media": [],
+      "events": []
+    },
+    {
+      "year": "2025",
+      "title": "Livecoding with ORCA",
+      "org": "Alt.Baithak",
+      "location": "Delhi, India",
+      "categories": [
+        "Masterclass"
+      ],
+      "shortDesc": "Masterclass on the esoteric coding language ORCA.",
+      "fullDesc": "<p>Advanced techniques in procedural sequencing using ORCA.</p>",
+      "link": "",
+      "media": [],
+      "events": []
+    },
+    {
+      "year": "2022",
+      "title": "Creative Music Exploration",
+      "org": "Ashoka University",
+      "location": "Sonipat, India",
+      "categories": [
+        "Workshop"
+      ],
+      "shortDesc": "Teaching assistant to Anirban Ghosh for creative music exploration.",
+      "fullDesc": "<p>Assisted Anirban Ghosh in teaching creative music exploration at Ashoka University.</p>",
+      "link": "",
+      "media": [],
+      "events": []
+    },
+    {
+      "year": "2022",
+      "title": "ORCA Workshop",
+      "org": "SACAC",
+      "location": "India",
+      "categories": [
+        "Workshop"
+      ],
+      "shortDesc": "Generative music workshop using ORCA.",
+      "fullDesc": "<p>A workshop on generative music creation using the esoteric coding language ORCA.</p>",
+      "link": "",
+      "media": [],
+      "events": []
+    },
+    {
+      "year": "2022",
+      "title": "Listening to See",
+      "org": "Prayogillu",
+      "location": "Online",
+      "categories": [
+        "Workshop"
+      ],
+      "shortDesc": "Virtual listening session for kids.",
+      "fullDesc": "<p>A virtual session for kids exploring the relationship between listening and seeing.</p>",
+      "link": "",
+      "media": [],
+      "events": []
+    },
+    {
+      "year": "2021",
+      "title": "Sound Design and Storytelling",
+      "org": "Mad Art Collective",
+      "location": "Online",
+      "categories": [
+        "Workshop"
+      ],
+      "shortDesc": "Online workshop on sound design and storytelling.",
+      "fullDesc": "<p>An online workshop exploring the intersection of sound design and narrative storytelling.</p>",
+      "link": "",
+      "media": [],
+      "events": []
+    },
+    {
+      "year": "2026",
+      "title": "Unearthing Echologies",
+      "org": "KNMA",
+      "location": "Delhi",
+      "categories": [],
+      "shortDesc": "Unearthing Echologies was a three-day intensive workshop that positions active listening as an essential practice for environmental conservation.",
+      "fullDesc": "By exploring the intersections of sound art, acoustic ecology, and sound design, the workshop engaged with participants to create an archive of the dawn chorus of Delhi and transform these field recordings into speculative soundscapes. The workshop used accessible and open-source tools such as audacity to weave personal narratives and archives into their compositions, culminating in a public showcase of their sonic artifacts.",
+      "link": "",
+      "media": [
+        {
+          "type": "image",
+          "url": "media/knma/01.jpg"
+        },
+        {
+          "type": "image",
+          "url": "media/knma/02.jpg"
+        },
+        {
+          "type": "image",
+          "url": "media/knma/03.jpg"
+        },
+        {
+          "type": "image",
+          "url": "media/knma/04.jpg"
+        }
+      ]
+    },
+    {
+      "year": "2026",
+      "title": "Signal to sound",
+      "org": "Independent",
+      "location": "Delhi, India",
+      "categories": [
+        "workshop"
+      ],
+      "shortDesc": "A four-day technical workshop focused on algorithmic composition and open-source creative coding environments, hosted at Mool in New Delhi.",
+      "fullDesc": "<p>From March 30 to April 2, 2026, I organized and facilitated the Signal to Sound workshop at Mool in South Extension, Delhi. The four-day program functioned as a practical training environment for algorithmic music composition and sound design utilizing Free and Open Source Software (FOSS).</p>\n<br></br>\n<p>My role encompassed managing participant registrations, distributing technical resources, and leading the direct training sessions. The curriculum centered heavily on open-source live-coding environments. We specifically utilized ORCA for generative sequencing, alongside technical demonstrations of tools like SuperCollider and Hydra. The primary objective of the workshop was to equip attendees with a functional framework to construct complex audio-visual systems entirely independent of proprietary or commercial hardware and software constraints.</p>",
+      "link": "",
+      "media": []
+    }
+  ],
+  "about": "I am an interdisciplinary artist, sound designer, and electronic musician working under the moniker beatnyk. My practice is based at the intersection of sound, art, and technology, treating computer algorithms and electronic systems as live instruments.\n\nMy background started in engineering before I transitioned fully into sound design and creative coding. That structural training directly shapes how I approach audio today. Rather than treating technology as a sterile tool, I look at software, code, and hardware modules as malleable environments for improvisation. I rely heavily on Free and Open Source Software (FOSS) and creative coding environments—specifically tools like ORCA, TidalCycles, SoniPi and SuperCollider—alongside modular synthesis and field recordings.\n\nI am interested in the friction that occurs when clean, algorithmic processes meet the chaotic, unscripted noise of the real world. A large part of this involves listening as an active practice. I use field recordings—particularly tracking the shifts in urban bird songs and environmental data—to document how spaces change under the weight of infrastructure development.\n\nMy practice spans standalone installations, collaborative sound design for film and performance, and arts organizing:\n\nKibitzer (2026): Created in collaboration with artist Sethuraman for the St+art Kolkata 2025–26 festival at TRI Art & Culture. This 5-channel interactive installation reinterpreted the traditional Bengali adda and street chess. I mapped the archival moves of the 1880 Liverpool vs. Calcutta telegraph match through a custom Python script into a rhythmic Morse code baseline, layering it with live chess commentary, recited personal letters, and morphed cinema audio.\n\nThe City at Dawn (2023): A collaborative sound piece produced with Surbhi Mittal (Pale Blue Dotter) for the Norient City Sounds: Delhi exhibition. The project functioned as a longitudinal inquiry into New Delhi's soundscape ecologies, capturing the stark acoustic contradictions between infrastructure noise and surviving natural biophony.\n\nCollaborative Audio Post-Production: I frequently design soundscapes that navigate political, environmental, and journalistic landscapes. This includes building the multichannel surround sound architecture for artist Ravi Agarwal’s installation “I am going to the sea, clear the path” (Lahore Biennale 2024 / Gallery Espace 2026) tracking endangered river dolphins, as well as executing the sound design and mix for Chambal Media’s official Khabar Lahariya showreel.\n\nCurations & Platforms (W.I.P Labs): As an arts organizer, I have programmed and coordinated monthly events, workshops, and performances for W.I.P Labs. This includes curating the Computational Arts and This Is Not Improvised segments for the Portals exhibition series at the Goethe-Institut / Max Mueller Bhavan in New Delhi, creating a localized space for open-source tool sharing, modular synthesis, and live cross-disciplinary improvisation.\n\nOver the years, I have shared my work, performed, and developed research across various cultural spaces, experimental music festivals, and institutional residencies:\n\nShowcases & Performances: My work and performances have been featured at platforms including the India Art Fair, the International Documentary and Short Film Festival of Kerala (IDSFFK), Norient Sounds, GitHub Satellite, Reproduce Artists, and various Algorave events.\n\nFellowships & Residencies: I was a fellow at the BeFantastic Together program (2021) and a resident at Internet Public Radio. In 2025, I participated in the Sonic Writings and Soundings programme at the Darmstadt Ferienkurse.\n\nRecent Research: In early 2026, I developed the project Mapping Dissonance during a Web Residency with Akademie Schloss Solitude, focusing on bird calls as critical ecological data. I am currently participating as a resident host for the first season of Kissa In-Store Radio and working on a radio residency curated by Antariksh Records."
+}

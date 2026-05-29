@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>beatnyk — site editor</title>
+    <link rel="icon" type="image/png" href="favicon.png">    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg: #f8f9fa; --text: #212529; --sub: #495057;
+            --border: #dee2e6; --accent: #212529;
+        }
+        body { font-family: 'Helvetica Neue', Helvetica, sans-serif; background: var(--bg); color: var(--text); padding: 40px; max-width: 960px; margin: 0 auto; }
+        h1 { font-size: 1.4rem; font-weight: 700; margin-bottom: 8px; }
+        .subtitle { font-size: 0.85rem; color: var(--sub); margin-bottom: 40px; }
+
+        /* Tabs */
+        .tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); margin-bottom: 30px; }
+        .tab { padding: 10px 20px; font-size: 0.85rem; background: none; border: none; border-bottom: 2px solid transparent; cursor: pointer; color: var(--sub); font-family: inherit; }
+        .tab.active { color: var(--text); border-bottom-color: var(--accent); }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        /* Items list */
+        .item-list { margin-bottom: 20px; }
+        .item-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; border-bottom: 1px solid var(--border); cursor: pointer; transition: background 0.15s; }
+        .item-row:hover { background: #e9ecef; }
+        .item-row .item-info { font-size: 0.9rem; }
+        .item-row .item-year { color: var(--sub); font-size: 0.8rem; margin-right: 12px; }
+        .item-row .item-actions { display: flex; gap: 8px; }
+
+        /* Buttons */
+        .btn { padding: 6px 14px; font-size: 0.8rem; font-family: inherit; border: 1px solid var(--accent); cursor: pointer; transition: all 0.15s; background: none; color: var(--text); }
+        .btn:hover { background: var(--accent); color: var(--bg); }
+        .btn-primary { background: var(--accent); color: var(--bg); }
+        .btn-primary:hover { background: transparent; color: var(--text); }
+        .btn-danger { border-color: #dc3545; color: #dc3545; }
+        .btn-danger:hover { background: #dc3545; color: #fff; }
+        .btn-sm { padding: 4px 10px; font-size: 0.75rem; }
+
+        /* Form */
+        .form-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.3); z-index: 100; }
+        .form-overlay.active { display: flex; align-items: center; justify-content: center; }
+        .form-panel { background: var(--bg); padding: 30px; width: 700px; max-height: 85vh; overflow-y: auto; border: 1px solid var(--border); }
+        .form-panel h2 { font-size: 1.1rem; font-weight: 600; margin-bottom: 20px; }
+        .field { margin-bottom: 16px; }
+        .field label { display: block; font-size: 0.8rem; color: var(--sub); margin-bottom: 4px; text-transform: lowercase; }
+        .field input, .field textarea, .field select { width: 100%; padding: 8px 10px; font-size: 0.9rem; font-family: inherit; border: 1px solid var(--border); background: #fff; color: var(--text); }
+        .field textarea { min-height: 100px; resize: vertical; }
+        .field-row { display: flex; gap: 12px; }
+        .field-row .field { flex: 1; }
+        .form-actions { display: flex; gap: 10px; margin-top: 20px; }
+
+        /* Media entries */
+        .media-entries { margin-top: 8px; }
+        .media-entry { display: flex; gap: 8px; margin-bottom: 6px; align-items: center; }
+        .media-entry select { width: 90px; padding: 6px; font-size: 0.8rem; font-family: inherit; border: 1px solid var(--border); }
+        .media-entry input { flex: 1; padding: 6px 8px; font-size: 0.8rem; font-family: inherit; border: 1px solid var(--border); }
+
+        /* Import/Export */
+        .io-section { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); }
+        .io-section h3 { font-size: 0.95rem; margin-bottom: 12px; }
+        .io-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+        .file-input-label { padding: 6px 14px; font-size: 0.8rem; border: 1px solid var(--accent); cursor: pointer; transition: all 0.15s; }
+        .file-input-label:hover { background: var(--accent); color: var(--bg); }
+        #fileInput { display: none; }
+
+        /* Hero editor */
+        .hero-group { margin-bottom: 20px; padding: 16px; border: 1px solid var(--border); }
+        .hero-group h3 { font-size: 0.9rem; font-weight: 600; margin-bottom: 12px; text-transform: capitalize; }
+        .hero-item { display: flex; gap: 8px; margin-bottom: 8px; }
+        .hero-item input { flex: 1; padding: 6px 8px; font-size: 0.85rem; font-family: inherit; border: 1px solid var(--border); }
+
+        /* Category checkboxes */
+        .category-checkboxes { display: flex; flex-wrap: wrap; gap: 6px 12px; margin-top: 4px; }
+        .cat-check { display: flex; align-items: center; gap: 4px; font-size: 0.8rem; color: var(--text); cursor: pointer; padding: 3px 8px; border: 1px solid var(--border); transition: all 0.15s; }
+        .cat-check:hover { background: #e9ecef; }
+        .cat-check input[type="checkbox"] { margin: 0; cursor: pointer; }
+        .cat-check.checked { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+
+        /* About editor */
+        #aboutTextarea { width: 100%; min-height: 200px; padding: 12px; font-size: 0.95rem; font-family: inherit; border: 1px solid var(--border); line-height: 1.6; resize: vertical; }
+    </style>
+</head>
+<body>
+
+<h1>site editor</h1>
+<p class="subtitle">edit data.json without touching code. load → edit → export → replace data.json.</p>
+
+<div class="tabs">
+    <button class="tab active" data-tab="work">work</button>
+    <button class="tab" data-tab="lab">lab</button>
+    <button class="tab" data-tab="hero">hero ticker</button>
+    <button class="tab" data-tab="about">about</button>
+</div>
+
+<!-- WORK TAB -->
+<div class="tab-content active" id="tab-work">
+    <button class="btn btn-primary" onclick="openForm('work')">+ add project</button>
+    <div class="item-list" id="workList"></div>
+</div>
+
+<!-- LAB TAB -->
+<div class="tab-content" id="tab-lab">
+    <button class="btn btn-primary" onclick="openForm('lab')">+ add workshop</button>
+    <div class="item-list" id="labList"></div>
+</div>
+
+<!-- HERO TAB -->
+<div class="tab-content" id="tab-hero">
+    <div id="heroEditor"></div>
+    <button class="btn" style="margin-top: 12px;" onclick="saveHero()">save hero changes</button>
+</div>
+
+<!-- ABOUT TAB -->
+<div class="tab-content" id="tab-about">
+    <p style="font-size: 0.8rem; color: var(--sub); margin-bottom: 8px;">separate paragraphs with a blank line.</p>
+    <textarea id="aboutTextarea"></textarea>
+    <button class="btn" style="margin-top: 12px;" onclick="saveAbout()">save about changes</button>
+</div>
+
+<!-- IMPORT/EXPORT -->
+<div class="io-section">
+    <h3>import / export</h3>
+    <div class="io-actions">
+        <label class="file-input-label" for="fileInput">load data.json</label>
+        <input type="file" id="fileInput" accept=".json">
+        <button class="btn btn-primary" onclick="exportJSON()">export data.json</button>
+    </div>
+</div>
+
+<!-- FORM OVERLAY -->
+<div class="form-overlay" id="formOverlay">
+    <div class="form-panel">
+        <h2 id="formTitle">add project</h2>
+        <div class="field-row">
+            <div class="field"><label>year</label><input id="f-year" placeholder="2025, ongoing, etc."></div>
+            <div class="field">
+                <label>categories (select multiple)</label>
+                <div class="category-checkboxes" id="f-categories"></div>
+            </div>
+        </div>
+        <div class="field"><label>title</label><input id="f-title"></div>
+        <div class="field-row">
+            <div class="field"><label>organisation</label><input id="f-org"></div>
+            <div class="field"><label>location</label><input id="f-location"></div>
+        </div>
+        <div class="field"><label>short description (hover preview)</label><input id="f-shortDesc" placeholder="one line overview"></div>
+        <div class="field"><label>full description (html ok)</label><textarea id="f-fullDesc" placeholder="<p>detailed write-up...</p>"></textarea></div>
+        <div class="field"><label>project link (url)</label><input id="f-link" placeholder="https://..."></div>
+        <div class="field">
+            <label>media</label>
+            <div class="media-entries" id="mediaEntries"></div>
+            <button class="btn btn-sm" onclick="addMediaEntry()" style="margin-top: 6px;">+ add media</button>
+        </div>
+        <div class="field">
+            <label>events (exhibitions / performances / installations)</label>
+            <div class="events-entries" id="eventEntries"></div>
+            <button class="btn btn-sm" onclick="addEventEntry()" style="margin-top: 6px;">+ add event</button>
+        </div>
+        <div class="form-actions">
+            <button class="btn btn-primary" onclick="saveForm()">save</button>
+            <button class="btn" onclick="closeForm()">cancel</button>
+        </div>
+    </div>
+</div>
+
+<script>
+let data = { heroProjects: { upcoming: [], current: [], recent: [] }, work: [], lab: [], about: "" };
+let editMode = null;   // 'work' or 'lab'
+let editIndex = -1;    // -1 = new, >=0 = editing
+
+const ALL_CATEGORIES = [
+    'performance', 'installation', 'exhibition', 'collaboration', 'festival',
+    'curation', 'music', 'research', 'residency', 'web-residency', 'fellowship',
+    'film', 'theatre', 'podcast', 'sound-design', 'publication', 'talk', 'radio',
+    'education', 'workshop', 'masterclass', 'other'
+];
+
+function renderCategoryCheckboxes(selected = []) {
+    const container = document.getElementById('f-categories');
+    container.innerHTML = ALL_CATEGORIES.map(cat => {
+        const checked = selected.includes(cat);
+        return `<label class="cat-check${checked ? ' checked' : ''}">
+            <input type="checkbox" value="${cat}" ${checked ? 'checked' : ''}
+                onchange="this.parentElement.classList.toggle('checked', this.checked)"> ${cat}
+        </label>`;
+    }).join('');
+}
+
+function getSelectedCategories() {
+    return Array.from(document.querySelectorAll('#f-categories input[type=checkbox]:checked'))
+        .map(cb => cb.value);
+}
+
+// --- TABS ---
+document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
+    });
+});
+
+// --- LOAD / IMPORT ---
+document.getElementById('fileInput').addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+        try {
+            data = JSON.parse(ev.target.result);
+            renderAll();
+        } catch (err) { alert('Invalid JSON: ' + err.message); }
+    };
+    reader.readAsText(file);
+});
+
+// Auto-load data.json from same directory
+fetch('data.json')
+    .then(r => r.json())
+    .then(d => { data = d; renderAll(); })
+    .catch(() => {});
+
+// --- EXPORT ---
+function exportJSON() {
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'data.json';
+    a.click();
+    URL.revokeObjectURL(url);
+}
+
+// --- RENDER ALL ---
+function renderAll() {
+    renderList('work');
+    renderList('lab');
+    renderHeroEditor();
+    document.getElementById('aboutTextarea').value = data.about || '';
+}
+
+function renderList(type) {
+    const container = document.getElementById(type + 'List');
+    const items = type === 'work' ? data.work : data.lab;
+    container.innerHTML = '';
+    items.forEach((item, i) => {
+        const row = document.createElement('div');
+        row.className = 'item-row';
+        row.innerHTML = `
+            <div class="item-info">
+                <span class="item-year">${item.year}</span>
+                <strong>${item.title}</strong> — ${item.org}
+            </div>
+            <div class="item-actions">
+                <button class="btn btn-sm" onclick="editItem('${type}', ${i})">edit</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteItem('${type}', ${i})">delete</button>
+            </div>
+        `;
+        container.appendChild(row);
+    });
+}
+
+// --- HERO EDITOR ---
+function renderHeroEditor() {
+    const container = document.getElementById('heroEditor');
+    container.innerHTML = '';
+    ['upcoming', 'current', 'recent'].forEach(cat => {
+        const group = document.createElement('div');
+        group.className = 'hero-group';
+        group.innerHTML = `<h3>${cat}</h3>`;
+        const items = data.heroProjects[cat] || [];
+        items.forEach((item, i) => {
+            const row = document.createElement('div');
+            row.className = 'hero-item';
+            row.innerHTML = `
+                <input value="${item.title}" placeholder="title" onchange="data.heroProjects['${cat}'][${i}].title=this.value">
+                <input value="${item.desc}" placeholder="description" onchange="data.heroProjects['${cat}'][${i}].desc=this.value">
+                <input value="${item.category}" placeholder="category" onchange="data.heroProjects['${cat}'][${i}].category=this.value">
+                <button class="btn btn-sm btn-danger" onclick="data.heroProjects['${cat}'].splice(${i},1);renderHeroEditor();">x</button>
+            `;
+            group.appendChild(row);
+        });
+        const addBtn = document.createElement('button');
+        addBtn.className = 'btn btn-sm';
+        addBtn.textContent = '+ add';
+        addBtn.onclick = () => { data.heroProjects[cat].push({ title: '', desc: '', category: '' }); renderHeroEditor(); };
+        group.appendChild(addBtn);
+        container.appendChild(group);
+    });
+}
+
+function saveHero() { alert('Hero changes saved in memory. Export data.json to persist.'); }
+
+// --- ABOUT ---
+function saveAbout() {
+    data.about = document.getElementById('aboutTextarea').value;
+    alert('About text saved in memory. Export data.json to persist.');
+}
+
+// --- FORM (Work / Lab) ---
+function openForm(type, index = -1) {
+    editMode = type;
+    editIndex = index;
+    const overlay = document.getElementById('formOverlay');
+    document.getElementById('formTitle').textContent = index >= 0 ? 'edit ' + type + ' item' : 'add ' + type + ' item';
+    
+    if (index >= 0) {
+        const item = type === 'work' ? data.work[index] : data.lab[index];
+        document.getElementById('f-year').value = item.year || '';
+        document.getElementById('f-title').value = item.title || '';
+        document.getElementById('f-org').value = item.org || '';
+        document.getElementById('f-location').value = item.location || '';
+        renderCategoryCheckboxes((item.categories || []).map(c => c.toLowerCase()));
+        document.getElementById('f-shortDesc').value = item.shortDesc || '';
+        document.getElementById('f-fullDesc').value = item.fullDesc || '';
+        document.getElementById('f-link').value = item.link || '';
+        renderMediaEntries(item.media || []);
+        renderEventEntries(item.events || []);
+    } else {
+        document.getElementById('f-year').value = '';
+        document.getElementById('f-title').value = '';
+        document.getElementById('f-org').value = '';
+        document.getElementById('f-location').value = '';
+        renderCategoryCheckboxes([]);
+        document.getElementById('f-shortDesc').value = '';
+        document.getElementById('f-fullDesc').value = '';
+        document.getElementById('f-link').value = '';
+        renderMediaEntries([]);
+        renderEventEntries([]);
+    }
+    overlay.classList.add('active');
+}
+
+function closeForm() {
+    document.getElementById('formOverlay').classList.remove('active');
+    editMode = null;
+    editIndex = -1;
+}
+
+function saveForm() {
+    const item = {
+        year: document.getElementById('f-year').value.trim(),
+        title: document.getElementById('f-title').value.trim(),
+        org: document.getElementById('f-org').value.trim(),
+        location: document.getElementById('f-location').value.trim(),
+        categories: getSelectedCategories(),
+        shortDesc: document.getElementById('f-shortDesc').value.trim(),
+        fullDesc: document.getElementById('f-fullDesc').value.trim(),
+        link: document.getElementById('f-link').value.trim(),
+        media: getMediaEntries(),
+        events: getEventEntries()
+    };
+
+    const list = editMode === 'work' ? data.work : data.lab;
+    if (editIndex >= 0) {
+        list[editIndex] = item;
+    } else {
+        list.push(item);
+    }
+    
+    closeForm();
+    renderAll();
+}
+
+function editItem(type, index) { openForm(type, index); }
+
+function deleteItem(type, index) {
+    if (!confirm('Delete this item?')) return;
+    const list = type === 'work' ? data.work : data.lab;
+    list.splice(index, 1);
+    renderAll();
+}
+
+// --- MEDIA ENTRIES ---
+function renderMediaEntries(media) {
+    const container = document.getElementById('mediaEntries');
+    container.innerHTML = '';
+    media.forEach((m, i) => addMediaEntry(m.type, m.url));
+}
+
+function addMediaEntry(type = 'image', url = '') {
+    const container = document.getElementById('mediaEntries');
+    const div = document.createElement('div');
+    div.className = 'media-entry';
+    div.innerHTML = `
+        <select>
+            <option value="image" ${type === 'image' ? 'selected' : ''}>image</option>
+            <option value="video" ${type === 'video' ? 'selected' : ''}>video</option>
+            <option value="audio" ${type === 'audio' ? 'selected' : ''}>audio</option>
+        </select>
+        <input value="${url}" placeholder="media/photo.jpg or https://embed-url...">
+        <button class="btn btn-sm btn-danger" onclick="this.parentElement.remove()">x</button>
+    `;
+    container.appendChild(div);
+}
+
+function getMediaEntries() {
+    const entries = [];
+    document.querySelectorAll('#mediaEntries .media-entry').forEach(row => {
+        const type = row.querySelector('select').value;
+        const url = row.querySelector('input').value.trim();
+        if (url) entries.push({ type, url });
+    });
+    return entries;
+}
+
+// --- EVENT ENTRIES ---
+function renderEventEntries(events) {
+    const container = document.getElementById('eventEntries');
+    container.innerHTML = '';
+    (events || []).forEach(ev => addEventEntry(ev));
+}
+
+function addEventEntry(evData) {
+    evData = evData || {};
+    const container = document.getElementById('eventEntries');
+    const div = document.createElement('div');
+    div.className = 'event-entry';
+    div.style.cssText = 'border: 1px solid var(--border); padding: 12px; margin-bottom: 8px;';
+    const esc = s => (s || '').replace(/"/g, '&quot;');
+    div.innerHTML = `
+        <div class="field-row">
+            <div class="field"><label>event title</label><input class="evt-title" value="${esc(evData.title)}" placeholder="exhibition name"></div>
+            <div class="field"><label>year</label><input class="evt-year" value="${esc(evData.year)}" placeholder="2025"></div>
+        </div>
+        <div class="field-row">
+            <div class="field"><label>place</label><input class="evt-place" value="${esc(evData.place)}" placeholder="Delhi, India"></div>
+            <div class="field"><label>organisation</label><input class="evt-org" value="${esc(evData.org)}" placeholder="Goethe Institut"></div>
+        </div>
+        <div class="field">
+            <label>event media</label>
+            <div class="evt-media-entries"></div>
+            <button class="btn btn-sm" onclick="addEvtMedia(this)">+ media</button>
+        </div>
+        <button class="btn btn-sm btn-danger" onclick="this.closest('.event-entry').remove()" style="margin-top: 6px;">remove event</button>
+    `;
+    container.appendChild(div);
+    if (evData.media && evData.media.length > 0) {
+        const mc = div.querySelector('.evt-media-entries');
+        evData.media.forEach(m => addEvtMediaTo(mc, m.type, m.url));
+    }
+}
+
+function addEvtMedia(btn) {
+    addEvtMediaTo(btn.previousElementSibling);
+}
+
+function addEvtMediaTo(container, type, url) {
+    type = type || 'image';
+    url = url || '';
+    const div = document.createElement('div');
+    div.className = 'media-entry';
+    div.innerHTML = `
+        <select>
+            <option value="image" ${type === 'image' ? 'selected' : ''}>image</option>
+            <option value="video" ${type === 'video' ? 'selected' : ''}>video</option>
+            <option value="audio" ${type === 'audio' ? 'selected' : ''}>audio</option>
+        </select>
+        <input value="${url}" placeholder="media/photo.jpg or https://...">
+        <button class="btn btn-sm btn-danger" onclick="this.parentElement.remove()">x</button>
+    `;
+    container.appendChild(div);
+}
+
+function getEventEntries() {
+    const events = [];
+    document.querySelectorAll('#eventEntries .event-entry').forEach(entry => {
+        const ev = {
+            title: entry.querySelector('.evt-title').value.trim(),
+            year: entry.querySelector('.evt-year').value.trim(),
+            place: entry.querySelector('.evt-place').value.trim(),
+            org: entry.querySelector('.evt-org').value.trim(),
+            media: []
+        };
+        entry.querySelectorAll('.evt-media-entries .media-entry').forEach(row => {
+            const type = row.querySelector('select').value;
+            const url = row.querySelector('input').value.trim();
+            if (url) ev.media.push({ type, url });
+        });
+        if (ev.title || ev.year || ev.place || ev.org) events.push(ev);
+    });
+    return events;
+}
+</script>
+
+</body>
+</html>

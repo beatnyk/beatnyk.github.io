@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>beatnyk | sound artist</title>
+    <link rel="icon" type="image/png" href="favicon.png">    
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=Urbanist:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+
+    <div class="cursor"></div>
+
+    <div class="hover-preview-box" id="hoverPreview"></div>
+
+    <div class="loader" id="loader">
+        <svg class="loader-circle" viewBox="0 0 100 100">
+            <circle class="loader-bg" cx="50" cy="50" r="45"></circle>
+            <circle class="loader-progress" id="loaderProgress" cx="50" cy="50" r="45"></circle>
+        </svg>
+        <div class="loader-text" id="loaderText">0</div>
+    </div>
+
+    <header class="site-header">
+        <div class="brand-container">
+            <h1 class="brand-logo" id="brandLogo">beatnyk</h1>
+        </div>
+        <button class="menu-dot" id="menuDot" aria-label="Toggle menu"></button>
+    </header>
+
+    <nav class="side-menu" id="sideMenu">
+        <ul class="menu-list">
+            <li><a href="#home" data-section="0">home</a></li>
+            <li><a href="#about" data-section="1">about</a></li>
+            <li><a href="#work" data-section="2">work</a></li>
+            <li><a href="#lab" data-section="3">lab</a></li>
+            <li><a href="#contact" data-section="4">contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="site-pusher" id="sitePusher">
+        <div class="horizontal-container" id="horizontalContainer">
+            
+            <section class="section hero-section" id="section-home">
+                <div class="section-content">
+                    <div class="hero-content">
+                        <div class="hero-top-info">
+                            <div class="hero-subtitle">sound designer // creative technologist // artist</div>
+                            <div class="hero-projects">
+                                <span class="project-label" id="projectLabel">current</span>
+                                <div class="project-items" id="projectItems"></div>
+                            </div>
+                        </div>
+                        <h2 class="hero-title" id="heroTitle">beatnyk</h2>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section about-section" id="section-about">
+                <div class="section-content">
+                    <div class="about-layout">
+                        <div class="about-sidebar">
+                            <h2 class="section-header" id="aboutTitle">about me</h2>
+                        </div>
+                        <div class="about-content-scroll">
+                            <div class="about-text" id="aboutText"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section work-section" id="section-work">
+                <div class="section-content work-content">
+                    <h2 class="section-header work-section-title" id="workTitle">work</h2>
+
+                    <div class="work-view-toggle" id="workViewToggle">
+                        <span class="toggle-label active" id="labelList">list</span>
+                        <label class="uiverse-switch">
+                            <input type="checkbox" id="viewToggleCheckbox">
+                            <span class="uiverse-slider"></span>
+                        </label>
+
+                        <span class="toggle-label" id="labelMindmap">mind map</span>
+                    </div>
+
+                    <div class="work-categories-view" id="workCategoriesView">
+                        <div class="work-cats-hero" id="workCatsHero"></div>
+                        <div class="work-results-panel" id="workResultsPanel">
+                            <div class="work-results-header">
+                                <span class="results-count" id="resultsCount"></span>
+                                <button class="clear-filters-btn" id="clearFiltersBtn">clear all</button>
+                            </div>
+                            <div class="work-results-scroll" id="workResultsScroll">
+                                <div class="work-results-list" id="workResultsList"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MIND MAP VIEW (all projects) -->
+                    <div class="work-mindmap-view" id="workMindmapView">
+                        <svg class="mindmap-svg" id="mindmapSvg" aria-label="Project mind map"></svg>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section lab-section" id="section-lab">
+                <div class="section-content">
+                    <div class="lab-header">
+                        <h2 class="section-header" id="labTitle">lab</h2>
+                        <div class="lab-filters" id="labFilterGroup"></div>
+                    </div>
+
+                    <div class="lab-layout">
+                        <div class="lab-list-container" id="labScrollContainer">
+                            <div class="lab-list" id="labList"></div>
+                        </div>
+
+                        <div class="lab-philosophy">
+                            <h3 class="sidebar-header">my practice and philosophy</h3>
+                            <div class="philosophy-text">
+                                <p>
+                                    As a facilitator, my practice is rooted in demystifying technology and fostering creative agency. I believe in open source knowledge, communal learning, and the power of code as a medium for artistic expression.
+                                </p>
+                                <p>
+                                    My workshops function as temporary autonomous labs where sound, code, and noise intersect to create new dialogues.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section contact-section" id="section-contact">
+                <div class="section-content">
+                    <div class="contact-layout">
+                        <h2 class="contact-title" id="contactTitle">
+                            stay<br>connected
+                        </h2>
+                        
+                        <div class="contact-right">
+                            <div class="contact-email-box">
+                                <a href="mailto:beatnyk@proton.me" class="email-link-large">beatnyk@proton.me</a>
+                            </div>
+                            
+                            <ul class="social-list">
+                                <li><a href="https://instagram.com/beatnyk" target="_blank" rel="noopener noreferrer">instagram</a></li>
+                                <li><a href="https://mastodon.social/@beatnyk" target="_blank" rel="noopener noreferrer">mastodon</a></li>
+                                <li><a href="https://soundcloud.com/b3atnyk" target="_blank" rel="noopener noreferrer">soundcloud</a></li>
+                                <li><a href="https://www.youtube.com/@beatnyk" target="_blank" rel="noopener noreferrer">youtube</a></li>
+                                <li><a href="https://www.twitch.tv/beatnyk" target="_blank" rel="noopener noreferrer">twitch</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <div class="project-detail-overlay" id="projectDetailOverlay">
+        <button class="close-detail-btn" id="closeDetailBtn">close [x]</button>
+        <div class="detail-content-layout">
+            <div class="detail-sidebar">
+                <h3 class="sidebar-header" id="detailYear">2025</h3>
+                <div class="detail-categories" id="detailCategories">performance</div>
+                <div class="detail-events-sidebar" id="detailEventsSidebar"></div>
+            </div>
+            <div class="detail-main">
+                <h2 class="detail-title" id="detailTitle">Project Title</h2>
+                <div class="detail-meta-info">
+                    <span id="detailOrg"></span> | <span id="detailLoc"></span>
+                </div>
+                <div class="detail-body" id="detailBody"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <span class="footer-text">© 2026 beatnyk</span>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

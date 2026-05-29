@@ -1,0 +1,11 @@
+BEATNYK SITE — PROMPTS LOG
+==========================
+
+[2026-03-30]
+
+PROMPT 1:
+"deep dive into this project and find all the design specific issues and bugs and report full analysis. do not change any content"
+
+PROMPT 2:
+"Fix all the issues. Do not touch the content. Save my prompts in a txt file and save your edits in changelog.
+I want to redesign my work page - instead of tabular list of work, let all the categories be the first thing seen on the page (big ang bold). Upon selecting the category, respective projects will show up on the page. the logic is of AND gate and not OR, meaning only projects satisfying all the selected categories must show up. Also add an All projects category on the filter. Upon clicking on all projects, A mind map of projects show up interlinked with the categories. Keep the design within the overall aesthetic of the website."
