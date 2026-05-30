@@ -3,186 +3,320 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>beatnyk | sound artist</title>
-    <link rel="icon" type="image/png" href="favicon.png">    
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=Urbanist:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link href="style.css" rel="stylesheet">
+    <title>beatnyk — index</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --fg: #e0e0e0;
+            --sub: #777;
+            --border: #333;
+        }
+
+        body.light-mode {
+            --bg: #f4f4f0;
+            --fg: #111111;
+            --sub: #555;
+            --border: #ccc;
+        }
+        
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            background: var(--bg);
+            color: var(--fg);
+            font-family: 'Courier New', Courier, monospace;
+            line-height: 1.6;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .container {
+            width: 90%; 
+            max-width: 1400px; 
+            margin: 0 auto;
+            padding: 2rem 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        @media (min-width: 600px) {
+            .container { padding: 4rem 0; }
+        }
+
+        header {
+            margin-bottom: 3rem;
+            border-bottom: 1px dashed var(--border);
+            padding-bottom: 1.5rem;
+        }
+
+        .header-top {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-bottom: 2rem;
+        }
+        
+        @media (min-width: 600px) {
+            .header-top {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: flex-start;
+            }
+        }
+
+        .header-titles { margin-bottom: 1rem; }
+        @media (min-width: 600px) { .header-titles { margin-bottom: 0; } }
+
+        h1 { font-size: 2.5rem; font-weight: bold; margin-bottom: 0.2rem; letter-spacing: -1px; }
+        .subtitle { font-size: 1rem; color: var(--sub); text-transform: lowercase; }
+
+        .header-actions {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 0.5rem;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: baseline;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        h2 { font-size: 1.2rem; font-weight: bold; text-transform: lowercase; color: var(--sub); }
+        
+        a, button.header-btn, span.toggle-btn {
+            color: var(--fg);
+            text-decoration: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-family: inherit;
+            font-size: inherit;
+        }
+        
+        a { border-bottom: 1px solid var(--fg); }
+        a:hover, button.header-btn:hover, span.toggle-btn:hover, footer a:hover { background: var(--fg); color: var(--bg); }
+
+        .header-btn {
+            font-size: 0.85rem;
+            border: 1px solid var(--border);
+            padding: 0.2rem 0.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        a.header-btn:hover { border-color: var(--fg); }
+
+        .about-text {
+            font-size: 1rem;
+            white-space: pre-wrap;
+            color: var(--sub);
+            max-width: 1000px; 
+        }
+
+        main { flex-grow: 1; }
+        
+        section { margin-bottom: 4rem; }
+
+        .section-content { display: none; }
+        .section-content.active { display: block; }
+
+        .item { margin-bottom: 2rem; }
+        
+        .item-header {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 0.25rem;
+        }
+
+        @media (min-width: 600px) {
+            .item-header {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: baseline;
+            }
+        }
+
+        .item-title { font-size: 1.1rem; font-weight: bold; }
+        .item-meta { font-size: 0.9rem; color: var(--sub); margin-top: 0.2rem; }
+        
+        @media (min-width: 600px) {
+            .item-meta { margin-top: 0; text-align: right; }
+        }
+
+        .item-short-desc { font-size: 0.95rem; margin-top: 0.25rem; max-width: 1100px; }
+        
+        .toggle-btn {
+            font-size: 0.85rem;
+            color: var(--sub);
+            margin-top: 0.5rem;
+            display: inline-block;
+        }
+
+        .item-full-desc {
+            display: none;
+            margin-top: 1rem;
+            padding-left: 1rem;
+            border-left: 1px solid var(--border);
+            font-size: 0.95rem;
+            color: var(--sub);
+            max-width: 1100px;
+        }
+
+        .item-full-desc.active { display: block; }
+        .item-full-desc p { margin-bottom: 0.75rem; }
+        .item-full-desc a { border-bottom: 1px dotted var(--sub); }
+
+        .sys-msg { color: #ff3333; font-size: 0.85rem; }
+
+        footer {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px dashed var(--border);
+            font-size: 0.9rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        @media (min-width: 600px) {
+            .footer-content {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: baseline;
+            }
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+    </style>
 </head>
 <body>
 
-    <div class="cursor"></div>
-
-    <div class="hover-preview-box" id="hoverPreview"></div>
-
-    <div class="loader" id="loader">
-        <svg class="loader-circle" viewBox="0 0 100 100">
-            <circle class="loader-bg" cx="50" cy="50" r="45"></circle>
-            <circle class="loader-progress" id="loaderProgress" cx="50" cy="50" r="45"></circle>
-        </svg>
-        <div class="loader-text" id="loaderText">0</div>
-    </div>
-
-    <header class="site-header">
-        <div class="brand-container">
-            <h1 class="brand-logo" id="brandLogo">beatnyk</h1>
-        </div>
-        <button class="menu-dot" id="menuDot" aria-label="Toggle menu"></button>
-    </header>
-
-    <nav class="side-menu" id="sideMenu">
-        <ul class="menu-list">
-            <li><a href="#home" data-section="0">home</a></li>
-            <li><a href="#about" data-section="1">about</a></li>
-            <li><a href="#work" data-section="2">work</a></li>
-            <li><a href="#lab" data-section="3">lab</a></li>
-            <li><a href="#contact" data-section="4">contact</a></li>
-        </ul>
-    </nav>
-
-    <div class="site-pusher" id="sitePusher">
-        <div class="horizontal-container" id="horizontalContainer">
+    <div class="container">
+        <header>
+            <div class="header-top">
+                <div class="header-titles">
+                    <h1>beatnyk</h1>
+                    <p class="subtitle">sound designer / computer musician / noise artist</p>
+                </div>
+                <div class="header-actions">
+                    <a href="https://drive.google.com/file/d/124kzdTUTpUBHeZSzpafFI2jsH_EelffT/view?usp=sharing" target="_blank" class="header-btn" rel="noopener noreferrer">[ cv ]</a>
+                    <button class="header-btn" onclick="toggleTheme()" id="theme-btn">[ light mode ]</button>
+                </div>
+            </div>
+            <div id="about-container" class="about-text">loading sys_data...</div>
+        </header>
+        
+        <main>
+            <section>
+                <div class="section-header">
+                    <h2>work_</h2>
+                    <span class="toggle-btn" onclick="toggleSection('work-container', this)">[+] expand</span>
+                </div>
+                <div id="work-container" class="section-content"></div>
+            </section>
             
-            <section class="section hero-section" id="section-home">
-                <div class="section-content">
-                    <div class="hero-content">
-                        <div class="hero-top-info">
-                            <div class="hero-subtitle">sound designer // creative technologist // artist</div>
-                            <div class="hero-projects">
-                                <span class="project-label" id="projectLabel">current</span>
-                                <div class="project-items" id="projectItems"></div>
-                            </div>
-                        </div>
-                        <h2 class="hero-title" id="heroTitle">beatnyk</h2>
-                    </div>
+            <section>
+                <div class="section-header">
+                    <h2>lab_</h2>
+                    <span class="toggle-btn" onclick="toggleSection('lab-container', this)">[+] expand</span>
                 </div>
+                <div id="lab-container" class="section-content"></div>
             </section>
+        </main>
 
-            <section class="section about-section" id="section-about">
-                <div class="section-content">
-                    <div class="about-layout">
-                        <div class="about-sidebar">
-                            <h2 class="section-header" id="aboutTitle">about me</h2>
-                        </div>
-                        <div class="about-content-scroll">
-                            <div class="about-text" id="aboutText"></div>
-                        </div>
-                    </div>
+        <footer>
+            <div class="footer-content">
+                <span style="color: var(--sub);">contact_</span>
+                <div class="footer-links">
+                    <a href="mailto:beatnyk@proton.me">beatnyk@proton.me</a>
+                    <a href="https://instagram.com/beatnyk" target="_blank" rel="noopener noreferrer">ig: @beatnyk</a>
                 </div>
-            </section>
+            </div>
+        </footer>
+    </div>
 
-            <section class="section work-section" id="section-work">
-                <div class="section-content work-content">
-                    <h2 class="section-header work-section-title" id="workTitle">work</h2>
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const btn = document.getElementById('theme-btn');
+            body.classList.toggle('light-mode');
+            if (body.classList.contains('light-mode')) {
+                btn.textContent = '[ dark mode ]';
+            } else {
+                btn.textContent = '[ light mode ]';
+            }
+        }
 
-                    <div class="work-view-toggle" id="workViewToggle">
-                        <span class="toggle-label active" id="labelList">list</span>
-                        <label class="uiverse-switch">
-                            <input type="checkbox" id="viewToggleCheckbox">
-                            <span class="uiverse-slider"></span>
-                        </label>
+        function toggleSection(id, btn) {
+            const content = document.getElementById(id);
+            if (content.classList.contains('active')) {
+                content.classList.remove('active');
+                btn.textContent = '[+] expand';
+            } else {
+                content.classList.add('active');
+                btn.textContent = '[-] close';
+            }
+        }
 
-                        <span class="toggle-label" id="labelMindmap">mind map</span>
-                    </div>
+        function toggleDesc(id) {
+            const desc = document.getElementById('desc-' + id);
+            const btn = document.getElementById('btn-' + id);
+            
+            if (desc.classList.contains('active')) {
+                desc.classList.remove('active');
+                btn.textContent = '[+] read more';
+            } else {
+                desc.classList.add('active');
+                btn.textContent = '[-] close';
+            }
+        }
 
-                    <div class="work-categories-view" id="workCategoriesView">
-                        <div class="work-cats-hero" id="workCatsHero"></div>
-                        <div class="work-results-panel" id="workResultsPanel">
-                            <div class="work-results-header">
-                                <span class="results-count" id="resultsCount"></span>
-                                <button class="clear-filters-btn" id="clearFiltersBtn">clear all</button>
-                            </div>
-                            <div class="work-results-scroll" id="workResultsScroll">
-                                <div class="work-results-list" id="workResultsList"></div>
-                            </div>
-                        </div>
-                    </div>
+        fetch('data.json')
+            .then(response => {
+                if (!response.ok) throw new Error('ERR_FILE_NOT_FOUND');
+                return response.json();
+            })
+            .then(data => {
+                document.getElementById('about-container').textContent = data.about || 'No about data found.';
 
-                    <!-- MIND MAP VIEW (all projects) -->
-                    <div class="work-mindmap-view" id="workMindmapView">
-                        <svg class="mindmap-svg" id="mindmapSvg" aria-label="Project mind map"></svg>
-                    </div>
-                </div>
-            </section>
-
-            <section class="section lab-section" id="section-lab">
-                <div class="section-content">
-                    <div class="lab-header">
-                        <h2 class="section-header" id="labTitle">lab</h2>
-                        <div class="lab-filters" id="labFilterGroup"></div>
-                    </div>
-
-                    <div class="lab-layout">
-                        <div class="lab-list-container" id="labScrollContainer">
-                            <div class="lab-list" id="labList"></div>
-                        </div>
-
-                        <div class="lab-philosophy">
-                            <h3 class="sidebar-header">my practice and philosophy</h3>
-                            <div class="philosophy-text">
-                                <p>
-                                    As a facilitator, my practice is rooted in demystifying technology and fostering creative agency. I believe in open source knowledge, communal learning, and the power of code as a medium for artistic expression.
-                                </p>
-                                <p>
-                                    My workshops function as temporary autonomous labs where sound, code, and noise intersect to create new dialogues.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="section contact-section" id="section-contact">
-                <div class="section-content">
-                    <div class="contact-layout">
-                        <h2 class="contact-title" id="contactTitle">
-                            stay<br>connected
-                        </h2>
+                const renderItems = (items, prefix) => {
+                    return (items || []).map((item, index) => {
+                        const uniqueId = `${prefix}-${index}`;
+                        const hasFullDesc = item.fullDesc && item.fullDesc.trim() !== "";
                         
-                        <div class="contact-right">
-                            <div class="contact-email-box">
-                                <a href="mailto:beatnyk@proton.me" class="email-link-large">beatnyk@proton.me</a>
+                        return `
+                            <div class="item">
+                                <div class="item-header">
+                                    <span class="item-title">
+                                        ${item.link ? `<a href="${item.link}" target="_blank" rel="noopener noreferrer">${item.title}</a>` : item.title}
+                                    </span>
+                                    <span class="item-meta">${item.year} // ${item.org}</span>
+                                </div>
+                                <div class="item-short-desc">${item.shortDesc || ''}</div>
+                                
+                                ${hasFullDesc ? `
+                                    <span class="toggle-btn" id="btn-${uniqueId}" onclick="toggleDesc('${uniqueId}')">[+] read more</span>
+                                    <div class="item-full-desc" id="desc-${uniqueId}">${item.fullDesc}</div>
+                                ` : ''}
                             </div>
-                            
-                            <ul class="social-list">
-                                <li><a href="https://instagram.com/beatnyk" target="_blank" rel="noopener noreferrer">instagram</a></li>
-                                <li><a href="https://mastodon.social/@beatnyk" target="_blank" rel="noopener noreferrer">mastodon</a></li>
-                                <li><a href="https://soundcloud.com/b3atnyk" target="_blank" rel="noopener noreferrer">soundcloud</a></li>
-                                <li><a href="https://www.youtube.com/@beatnyk" target="_blank" rel="noopener noreferrer">youtube</a></li>
-                                <li><a href="https://www.twitch.tv/beatnyk" target="_blank" rel="noopener noreferrer">twitch</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </section>
+                        `;
+                    }).join('');
+                };
 
-        </div>
-    </div>
-
-    <div class="project-detail-overlay" id="projectDetailOverlay">
-        <button class="close-detail-btn" id="closeDetailBtn">close [x]</button>
-        <div class="detail-content-layout">
-            <div class="detail-sidebar">
-                <h3 class="sidebar-header" id="detailYear">2025</h3>
-                <div class="detail-categories" id="detailCategories">performance</div>
-                <div class="detail-events-sidebar" id="detailEventsSidebar"></div>
-            </div>
-            <div class="detail-main">
-                <h2 class="detail-title" id="detailTitle">Project Title</h2>
-                <div class="detail-meta-info">
-                    <span id="detailOrg"></span> | <span id="detailLoc"></span>
-                </div>
-                <div class="detail-body" id="detailBody"></div>
-            </div>
-        </div>
-    </div>
-
-    <footer class="site-footer">
-        <span class="footer-text">© 2026 beatnyk</span>
-    </footer>
-
-    <script src="script.js"></script>
+                document.getElementById('work-container').innerHTML = renderItems(data.work, 'work');
+                document.getElementById('lab-container').innerHTML = renderItems(data.lab, 'lab');
+            })
+            .catch(error => {
+                document.getElementById('about-container').innerHTML = `<span class="sys-msg">fatal error: could not load data.json. Ensure files are served via a local web server, not directly from the file system.</span>`;
+            });
+    </script>
 </body>
 </html>

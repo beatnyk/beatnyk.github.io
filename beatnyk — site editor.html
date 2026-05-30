@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>beatnyk — site editor</title>
+    <link rel="icon" type="image/png" href="http://127.0.0.1:5500/temp_site/favicon.png">    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg: #f8f9fa; --text: #212529; --sub: #495057;
+            --border: #dee2e6; --accent: #212529;
+        }
+        body { font-family: 'Helvetica Neue', Helvetica, sans-serif; background: var(--bg); color: var(--text); padding: 40px; max-width: 960px; margin: 0 auto; }
+        h1 { font-size: 1.4rem; font-weight: 700; margin-bottom: 8px; }
+        .subtitle { font-size: 0.85rem; color: var(--sub); margin-bottom: 40px; }
+
+        /* Tabs */
+        .tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); margin-bottom: 30px; }
+        .tab { padding: 10px 20px; font-size: 0.85rem; background: none; border: none; border-bottom: 2px solid transparent; cursor: pointer; color: var(--sub); font-family: inherit; }
+        .tab.active { color: var(--text); border-bottom-color: var(--accent); }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        /* Items list */
+        .item-list { margin-bottom: 20px; }
+        .item-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; border-bottom: 1px solid var(--border); cursor: pointer; transition: background 0.15s; }
+        .item-row:hover { background: #e9ecef; }
+        .item-row .item-info { font-size: 0.9rem; }
+        .item-row .item-year { color: var(--sub); font-size: 0.8rem; margin-right: 12px; }
+        .item-row .item-actions { display: flex; gap: 8px; }
+
+        /* Buttons */
+        .btn { padding: 6px 14px; font-size: 0.8rem; font-family: inherit; border: 1px solid var(--accent); cursor: pointer; transition: all 0.15s; background: none; color: var(--text); }
+        .btn:hover { background: var(--accent); color: var(--bg); }
+        .btn-primary { background: var(--accent); color: var(--bg); }
+        .btn-primary:hover { background: transparent; color: var(--text); }
+        .btn-danger { border-color: #dc3545; color: #dc3545; }
+        .btn-danger:hover { background: #dc3545; color: #fff; }
+        .btn-sm { padding: 4px 10px; font-size: 0.75rem; }
+
+        /* Form */
+        .form-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.3); z-index: 100; }
+        .form-overlay.active { display: flex; align-items: center; justify-content: center; }
+        .form-panel { background: var(--bg); padding: 30px; width: 700px; max-height: 85vh; overflow-y: auto; border: 1px solid var(--border); }
+        .form-panel h2 { font-size: 1.1rem; font-weight: 600; margin-bottom: 20px; }
+        .field { margin-bottom: 16px; }
+        .field label { display: block; font-size: 0.8rem; color: var(--sub); margin-bottom: 4px; text-transform: lowercase; }
+        .field input, .field textarea, .field select { width: 100%; padding: 8px 10px; font-size: 0.9rem; font-family: inherit; border: 1px solid var(--border); background: #fff; color: var(--text); }
+        .field textarea { min-height: 100px; resize: vertical; }
+        .field-row { display: flex; gap: 12px; }
+        .field-row .field { flex: 1; }
+        .form-actions { display: flex; gap: 10px; margin-top: 20px; }
+
+        /* Media entries */
+        .media-entries { margin-top: 8px; }
+        .media-entry { display: flex; gap: 8px; margin-bottom: 6px; align-items: center; }
+        .media-entry select { width: 90px; padding: 6px; font-size: 0.8rem; font-family: inherit; border: 1px solid var(--border); }
+        .media-entry input { flex: 1; padding: 6px 8px; font-size: 0.8rem; font-family: inherit; border: 1px solid var(--border); }
+
+        /* Import/Export */
+        .io-section { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); }
+        .io-section h3 { font-size: 0.95rem; margin-bottom: 12px; }
+        .io-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+        .file-input-label { padding: 6px 14px; font-size: 0.8rem; border: 1px solid var(--accent); cursor: pointer; transition: all 0.15s; }
+        .file-input-label:hover { background: var(--accent); color: var(--bg); }
+        #fileInput { display: none; }
+
+        /* Hero editor */
+        .hero-group { margin-bottom: 20px; padding: 16px; border: 1px solid var(--border); }
+        .hero-group h3 { font-size: 0.9rem; font-weight: 600; margin-bottom: 12px; text-transform: capitalize; }
+        .hero-item { display: flex; gap: 8px; margin-bottom: 8px; }
+        .hero-item input { flex: 1; padding: 6px 8px; font-size: 0.85rem; font-family: inherit; border: 1px solid var(--border); }
+
+        /* Category checkboxes */
+        .category-checkboxes { display: flex; flex-wrap: wrap; gap: 6px 12px; margin-top: 4px; }
+        .cat-check { display: flex; align-items: center; gap: 4px; font-size: 0.8rem; color: var(--text); cursor: pointer; padding: 3px 8px; border: 1px solid var(--border); transition: all 0.15s; }
+        .cat-check:hover { background: #e9ecef; }
+        .cat-check input[type="checkbox"] { margin: 0; cursor: pointer; }
+        .cat-check.checked { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+
+        /* About editor */
+        #aboutTextarea { width: 100%; min-height: 200px; padding: 12px; font-size: 0.95rem; font-family: inherit; border: 1px solid var(--border); line-height: 1.6; resize: vertical; }
+    </style>
+</head>
+<body>
+
+<h1>site editor</h1>
+<p class="subtitle">edit data.json without touching code. load → edit → export → replace data.json.</p>
+
+<div class="tabs">
+    <button class="tab" data-tab="work">work</button>
+    <button class="tab" data-tab="lab">lab</button>
+    <button class="tab" data-tab="hero">hero ticker</button>
+    <button class="tab active" data-tab="about">about</button>
+</div>
+
+<!-- WORK TAB -->
+<div class="tab-content" id="tab-work">
+    <button class="btn btn-primary" onclick="openForm('work')">+ add project</button>
+    <div class="item-list" id="workList"><div class="item-row">
+            <div class="item-info">
+                <span class="item-year">2026</span>
+                <strong>mapping dissonance</strong> — Akademie Schloss Solitude / Polymorphic Futures
+            </div>
+            <div class="item-actions">
+                <button class="btn btn-sm" onclick="editItem('work', 0)">edit</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteItem('work', 0)">delete</button>
+            </div>
+        </div><div class="item-row">
+            <div class="item-info">
+                <span class="item-year">ongoing</span>
+                <strong>hypnagōgos</strong> — independent
+            </div>
+            <div class="item-actions">
+                <button class="btn btn-sm" onclick="editItem('work', 1)">edit</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteItem('work', 1)">delete</button>
+            </div>
+        </div><div class="item-row">
+            <div class="item-info">
+                <span class="item-year">ongoing</span>
+                <strong>agents of malarkey</strong> — independent
+            </div>
+            <div class="item-actions">
+                <button class="btn btn-sm" onclick="editItem('work', 2)">edit</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteItem('work', 2)">delete</button>
+            </div>
+        </div><div class="item-row">
+            <div class="item-info">
+                <span class="item-year">2025</span>
+                <strong>kibitzer</strong> — St+art India / Asian Paints
+            </div>
+            <div class="item-actions">
+                <button class="btn btn-sm" onclick="editItem('work', 3)">edit</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteItem('work', 3)">delete</button>
+            </div>
+        </div><div class="item-row">
+            <div class="item-info">
+                <span class="item-year">2025</span>
+                <strong>preamble</strong> — Darmstadt Ferienkurse
+            </div>
+            <div class="item-actions">
+                <button class="btn btn-sm" onclick="editItem('work', 4)">edit</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteItem('work', 4)">delete</button>
+            </div>
+        </div><div class="item-row">
+            <div class="item-info">
+                <span class="item-year">2025</span>
+                <strong>sonic writings &amp; soundings</strong> — Darmstadt Ferienkurse
+            </div>
+            <div class="item-actions">
+                <button class="btn btn-sm" onclick="editItem('work', 5)">edit</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteItem('work', 5)">delete</button>
+            </div>
+        </div><div class="item-row">
+            <div class="item-info">
+                <span class="item-year">2025</span>
+                <strong>algorave india: compilation one</strong> — Algorave India
+            </div>
+            <div class="item-actions">
+                <button class="btn btn-sm" onclick="editItem('work', 6)">edit</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteItem('work', 6)">delete</button>
+            </div>
+        </div><div class="item-row">
+            <div class="item-info">
+                <span class="item-year">2025</span>
+                <strong>7th orbit: generative generation</strong> — Algorave India / W.I.P Labs
+            </div>
+            <div class="item-actions">
+                <button class="btn btn-sm" onclick="editItem('work', 7)">edit</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteItem('work', 7)">delete</button>
+            </div>
+        </div><div class="item-row">
+            <div class="item-info">
+                <span class="item-year">2025</span>
+                <strong>xxxi</strong> — Self-Released
+            </div>
+            <div class="item-actions">
+                <button class="btn btn-sm" onclick="editItem('work', 8)">edit</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteItem('work', 8)">delete</button>
+            </div>
+        </div><div class="item-row">
+            <div class="item-info">
+                <span class="item-year">2024</span>
+                <strong>w.i.p alt.fest 2024</strong> — W.I.P Labs
+            </div>
+            <div class="item-actions">
+                <button class="btn btn-sm" onclick="editItem('work', 9)">edit</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteItem('work', 9)">delete</button>
+            </div>
+        </div><div class="item-row">
+            <div class="item-info">
+                <span class="item-year">2024</span>
+                <strong>i am going to the sea, clear the path</strong> — Lahore Biennale Foundation
+            </div>
+            <div class="item-actions">
+                <button class="btn btn-sm" onclick="editItem('work', 10)">edit</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteItem('work', 10)">delete</button>
+            </div>
+        </div><div class="item-row">
+            <div class="item-info">
+                <span class="item-year">2024</span>
+                <strong>computational arts</strong> — W.I.P Labs / Goethe Institut
+            </div>
+            <div class="item-actions">
+                <button class="btn btn-sm" onclick="editItem('work', 11)">edit</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteItem('work', 11)">delete</button>
+            </div>
+        </div><div class="item-row">
+            <div class="item-info">
+                <span class="item-year">2024</span>
+                <strong>this is not improvised</strong> — W.I.P Labs / Goethe Institut
+            </div>
+            <div class="item-actions">
+                <button class="btn btn-sm" onclick="editItem('work', 12)">edit</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteItem('work', 12)">delete</button>
+            </div>
+        </div><div class="item-row">
+            <div class="item-info">
+                <span class="item-year">2024</span>
+                <strong>live-coding soundscapes for theatre with orca</strong> — Audio DevCon x India
+            </div>
+            <div class="item-actions">
+                <button class="btn btn-sm" onclick="editItem('work', 13)">edit</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteItem('work', 13)">delete</button>
+            </div>
+        </div><div class="item-row">
+            <div class="item-info">
+                <span class="item-year">2023</span>
+                <strong>thinking on thinking</strong> — Independent
+            </div>
+            <div class="item-actions">
+                <button class="btn btn-sm" onclick="editItem('work', 14)">edit</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteItem('work', 14)">delete</button>
+            </div>
+        </div><div class="item-row">
+            <div class="item-info">
+                <span class="item-year">2023</span>
+                <strong>free wav 2.0</strong> — Bhoomi Farms
+            </div>
+            <div class="item-actions">
+                <button class="btn btn-sm" onclick="editItem('work', 15)">edit</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteItem('work', 15)">delete</button>
+            </div>
+        </div><div class="item-row">
+            <div class="item-info">
+                <span class="item-year">2023</span>
+                <strong>dawn chorus of delhi</strong> — Norient City Sounds
+            </div>
+            <div class="item-actions">
+                <button class="btn btn-sm" onclick="editItem('work', 16)">edit</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteItem('work', 16)">delete</button>
+            </div>
+        </div><div class="item-row">
+            <div class="item-info">
+                <span class="item-year">2023</span>
+                <strong>lohaca ii</strong> — Institute for Art in Public Space Styria
+            </div>
+            <div class="item-actions">
+                <button class="btn btn-sm" onclick="editItem('work', 17)">edit</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteItem('work', 17)">delete</button>
+            </div>
+        </div><div class="item-row">
+            <div class="item-info">
+                <span class="item-year">2023</span>
+                <strong>khabar lahariya</strong> — Independent
+            </div>
+            <div class="item-actions">
+                <button class="btn btn-sm" onclick="editItem('work', 18)">edit</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteItem('work', 18)">delete</button>
+            </div>
+        </div><div class="item-row">
+            <div class="item-info">
+                <span class="item-year">2023</span>
+                <strong>mau: the spirit dreams of cheraw</strong> — Independent
+            </div>
+            <div class="item-actions">
+                <button class="btn btn-sm" onclick="editItem('work', 19)">edit</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteItem('work', 19)">delete</button>
+            </div>
+        </div><div class="item-row">
+            <div class="item-info">
+                <span class="item-year">2023</span>
+                <strong>biroho</strong> — Independent
+            </div>
+            <div class="item-actions">
+                <button class="btn btn-sm" onclick="editItem('work', 20)">edit</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteItem('work', 20)">delete</button>
+            </div>
+        </div><div class="item-row">
+            <div class="item-info">
+                <span class="item-year">2023</span>
+                <strong>℅:podcast: the care of</strong> — Independent
+            </div>
+            <div class="item-actions">
+                <button class="btn btn-sm" onclick="editItem('work', 21)">edit</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteItem('work', 21)">delete</button>
+            </div>
+        </div><div class="item-row">
+            <div class="item-info">
+                <span class="item-year">2022</span>
+                <strong>water nodes</strong> — Goldsmith University
+            </div>
+            <div class="item-actions">
+                <button class="btn btn-sm" onclick="editItem('work', 22)">edit</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteItem('work', 22)">delete</button>
+            </div>
+        </div><div class="item-row">
+            <div class="item-info">
+                <span class="item-year">2022</span>
+                <strong>a symphony found in the wilderness of noise</strong> — Serendipity Arts Foundation
+            </div>
+            <div class="item-actions">
+                <button class="btn btn-sm" onclick="editItem('work', 23)">edit</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteItem('work', 23)">delete</button>
+            </div>
+        </div><div class="item-row">
+            <div class="item-info">
+                <span class="item-year">2022</span>
+                <strong>prowl</strong> — Independent
+            </div>
+            <div class="item-actions">
+                <button class="btn btn-sm" onclick="editItem('work', 24)">edit</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteItem('work', 24)">delete</button>
+            </div>
+        </div><div class="item-row">
+            <div class="item-info">
+                <span class="item-year">2022</span>
+                <strong>melancholiair</strong> — Self-Released
+            </div>
+            <div class="item-actions">
+                <button class="btn btn-sm" onclick="editItem('work', 25)">edit</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteItem('work', 25)">delete</button>
+            </div>
+        </div><div class="item-row">
+            <div class="item-info">
+                <span class="item-year">2021-2023</span>
+                <strong>whales for climate</strong> — BeFantastic Fellowship / Goethe Institut
+            </div>
+            <div class="item-actions">
+                <button class="btn btn-sm" onclick="editItem('work', 26)">edit</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteItem('work', 26)">delete</button>
+            </div>
+        </div><div class="item-row">
+            <div class="item-info">
+                <span class="item-year">2021-2022</span>
+                <strong>internet public radio</strong> — Internet Public Radio
+            </div>
+            <div class="item-actions">
+                <button class="btn btn-sm" onclick="editItem('work', 27)">edit</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteItem('work', 27)">delete</button>
+            </div>
+        </div><div class="item-row">
+            <div class="item-info">
+                <span class="item-year">2021</span>
+                <strong>dastaan live: kabira khada bazaar mein</strong> — Dastaan LIVE
+            </div>
+            <div class="item-actions">
+                <button class="btn btn-sm" onclick="editItem('work', 28)">edit</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteItem('work', 28)">delete</button>
+            </div>
+        </div><div class="item-row">
+            <div class="item-info">
+                <span class="item-year">2021</span>
+                <strong>cotton clouds</strong> — Self-Released
+            </div>
+            <div class="item-actions">
+                <button class="btn btn-sm" onclick="editItem('work', 29)">edit</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteItem('work', 29)">delete</button>
+            </div>
+        </div><div class="item-row">
+            <div class="item-info">
+                <span class="item-year">2021</span>
+                <strong>the palanquin of yatudhani</strong> — Independent
+            </div>
+            <div class="item-actions">
+                <button class="btn btn-sm" onclick="editItem('work', 30)">edit</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteItem('work', 30)">delete</button>
+            </div>
+        </div><div class="item-row">
+            <div class="item-info">
+                <span class="item-year">2020-2021</span>
+                <strong>woodworking apprenticeship</strong> — Studio Clutter
+            </div>
+            <div class="item-actions">
+                <button class="btn btn-sm" onclick="editItem('work', 31)">edit</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteItem('work', 31)">delete</button>
+            </div>
+        </div><div class="item-row">
+            <div class="item-info">
+                <span class="item-year">2020</span>
+                <strong>coming out party for the androgynous trees</strong> — Goethe Institut / Max Mueller Bhavan
+            </div>
+            <div class="item-actions">
+                <button class="btn btn-sm" onclick="editItem('work', 32)">edit</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteItem('work', 32)">delete</button>
+            </div>
+        </div><div class="item-row">
+            <div class="item-info">
+                <span class="item-year">2020</span>
+                <strong>loss of horizon and converging acts</strong> — Goethe Institut / Max Mueller Bhavan
+            </div>
+            <div class="item-actions">
+                <button class="btn btn-sm" onclick="editItem('work', 33)">edit</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteItem('work', 33)">delete</button>
+            </div>
+        </div><div class="item-row">
+            <div class="item-info">
+                <span class="item-year">2020</span>
+                <strong>synthfarm</strong> — Bagan Farm
+            </div>
+            <div class="item-actions">
+                <button class="btn btn-sm" onclick="editItem('work', 34)">edit</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteItem('work', 34)">delete</button>
+            </div>
+        </div><div class="item-row">
+            <div class="item-info">
+                <span class="item-year">2020</span>
+                <strong>march dance</strong> — Basement 21
+            </div>
+            <div class="item-actions">
+                <button class="btn btn-sm" onclick="editItem('work', 35)">edit</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteItem('work', 35)">delete</button>
+            </div>
+        </div><div class="item-row">
+            <div class="item-info">
+                <span class="item-year">2020</span>
+                <strong>rainy summer</strong> — Self-Released
+            </div>
+            <div class="item-actions">
+                <button class="btn btn-sm" onclick="editItem('work', 36)">edit</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteItem('work', 36)">delete</button>
+            </div>
+        </div><div class="item-row">
+            <div class="item-info">
+                <span class="item-year">2020</span>
+                <strong>flipped mixtape</strong> — Self-Released
+            </div>
+            <div class="item-actions">
+                <button class="btn btn-sm" onclick="editItem('work', 37)">edit</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteItem('work', 37)">delete</button>
+            </div>
+        </div><div class="item-row">
+            <div class="item-info">
+                <span class="item-year">2020</span>
+                <strong>paper flowers</strong> — Self-Released
+            </div>
+            <div class="item-actions">
+                <button class="btn btn-sm" onclick="editItem('work', 38)">edit</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteItem('work', 38)">delete</button>
+            </div>
+        </div></div>
+</div>
+
+<!-- LAB TAB -->
+<div class="tab-content" id="tab-lab">
+    <button class="btn btn-primary" onclick="openForm('lab')">+ add workshop</button>
+    <div class="item-list" id="labList"><div class="item-row">
+            <div class="item-info">
+                <span class="item-year">2026</span>
+                <strong>Echoes from Memory</strong> — Museum of Art &amp; Photography
+            </div>
+            <div class="item-actions">
+                <button class="btn btn-sm" onclick="editItem('lab', 0)">edit</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteItem('lab', 0)">delete</button>
+            </div>
+        </div><div class="item-row">
+            <div class="item-info">
+                <span class="item-year">2025</span>
+                <strong>Generative Soundscapes</strong> — Ambedkar University Delhi
+            </div>
+            <div class="item-actions">
+                <button class="btn btn-sm" onclick="editItem('lab', 1)">edit</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteItem('lab', 1)">delete</button>
+            </div>
+        </div><div class="item-row">
+            <div class="item-info">
+                <span class="item-year">2025</span>
+                <strong>Listening to Where Trees Lament</strong> — Goethe-Institut / FICA
+            </div>
+            <div class="item-actions">
+                <button class="btn btn-sm" onclick="editItem('lab', 2)">edit</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteItem('lab', 2)">delete</button>
+            </div>
+        </div><div class="item-row">
+            <div class="item-info">
+                <span class="item-year">2025</span>
+                <strong>Livecoding with ORCA</strong> — Alt.Baithak
+            </div>
+            <div class="item-actions">
+                <button class="btn btn-sm" onclick="editItem('lab', 3)">edit</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteItem('lab', 3)">delete</button>
+            </div>
+        </div><div class="item-row">
+            <div class="item-info">
+                <span class="item-year">2022</span>
+                <strong>Creative Music Exploration</strong> — Ashoka University
+            </div>
+            <div class="item-actions">
+                <button class="btn btn-sm" onclick="editItem('lab', 4)">edit</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteItem('lab', 4)">delete</button>
+            </div>
+        </div><div class="item-row">
+            <div class="item-info">
+                <span class="item-year">2022</span>
+                <strong>ORCA Workshop</strong> — SACAC
+            </div>
+            <div class="item-actions">
+                <button class="btn btn-sm" onclick="editItem('lab', 5)">edit</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteItem('lab', 5)">delete</button>
+            </div>
+        </div><div class="item-row">
+            <div class="item-info">
+                <span class="item-year">2022</span>
+                <strong>Listening to See</strong> — Prayogillu
+            </div>
+            <div class="item-actions">
+                <button class="btn btn-sm" onclick="editItem('lab', 6)">edit</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteItem('lab', 6)">delete</button>
+            </div>
+        </div><div class="item-row">
+            <div class="item-info">
+                <span class="item-year">2021</span>
+                <strong>Sound Design and Storytelling</strong> — Mad Art Collective
+            </div>
+            <div class="item-actions">
+                <button class="btn btn-sm" onclick="editItem('lab', 7)">edit</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteItem('lab', 7)">delete</button>
+            </div>
+        </div><div class="item-row">
+            <div class="item-info">
+                <span class="item-year">2026</span>
+                <strong>Unearthing Echologies</strong> — KNMA
+            </div>
+            <div class="item-actions">
+                <button class="btn btn-sm" onclick="editItem('lab', 8)">edit</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteItem('lab', 8)">delete</button>
+            </div>
+        </div><div class="item-row">
+            <div class="item-info">
+                <span class="item-year">2026</span>
+                <strong>Signal to sound</strong> — Independent
+            </div>
+            <div class="item-actions">
+                <button class="btn btn-sm" onclick="editItem('lab', 9)">edit</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteItem('lab', 9)">delete</button>
+            </div>
+        </div></div>
+</div>
+
+<!-- HERO TAB -->
+<div class="tab-content" id="tab-hero">
+    <div id="heroEditor"><div class="hero-group"><h3>upcoming</h3><div class="hero-item">
+                <input value="anandham flats" placeholder="title" onchange="data.heroProjects['upcoming'][0].title=this.value">
+                <input value="radio residency show for kissa in-store radio curated by antariksh records" placeholder="description" onchange="data.heroProjects['upcoming'][0].desc=this.value">
+                <input value="radio residency" placeholder="category" onchange="data.heroProjects['upcoming'][0].category=this.value">
+                <button class="btn btn-sm btn-danger" onclick="data.heroProjects['upcoming'].splice(0,1);renderHeroEditor();">x</button>
+            </div><button class="btn btn-sm">+ add</button></div><div class="hero-group"><h3>current</h3><div class="hero-item">
+                <input value="hypnagōgos" placeholder="title" onchange="data.heroProjects['current'][0].title=this.value">
+                <input value="sleep concert series inquiring the influence of music in dreams" placeholder="description" onchange="data.heroProjects['current'][0].desc=this.value">
+                <input value="performance" placeholder="category" onchange="data.heroProjects['current'][0].category=this.value">
+                <button class="btn btn-sm btn-danger" onclick="data.heroProjects['current'].splice(0,1);renderHeroEditor();">x</button>
+            </div><button class="btn btn-sm">+ add</button></div><div class="hero-group"><h3>recent</h3><div class="hero-item">
+                <input value="unearthing echologies" placeholder="title" onchange="data.heroProjects['recent'][0].title=this.value">
+                <input value="workshop on acoustic ecologies and speculative radio at kiran nadar museum of art" placeholder="description" onchange="data.heroProjects['recent'][0].desc=this.value">
+                <input value="workshop" placeholder="category" onchange="data.heroProjects['recent'][0].category=this.value">
+                <button class="btn btn-sm btn-danger" onclick="data.heroProjects['recent'].splice(0,1);renderHeroEditor();">x</button>
+            </div><button class="btn btn-sm">+ add</button></div></div>
+    <button class="btn" style="margin-top: 12px;" onclick="saveHero()">save hero changes</button>
+</div>
+
+<!-- ABOUT TAB -->
+<div class="tab-content active" id="tab-about">
+    <p style="font-size: 0.8rem; color: var(--sub); margin-bottom: 8px;">separate paragraphs with a blank line.</p>
+    <textarea id="aboutTextarea" style="height: 560px;">I am a sound 
+artist based in Delhi working under the name beatnyk. Coming from an 
+engineering background, my practice explores the direct connections 
+between sound art, design, and technology.
+
+My work often draws inspiration from natural soundscapes and the 
+environments we inhabit. I build immersive live performances using code 
+and electronic instruments, treating the computer as a live space for 
+improvisation. Whether I am using field recordings of bird songs to 
+document ecological shifts or working with synthesized noise, my focus 
+is on how audio shapes our physical spaces.
+
+I believe that listening is a powerful act of conservation and an 
+essential tool for understanding the world around us. Through my 
+projects, I aim to inspire audiences to pay closer attention to the 
+friction between the sounds of nature and the hum of technology, 
+fostering a deeper appreciation of the environments we live in. My 
+practice combines technical execution and environmental awareness, 
+inviting people to engage with sound in thoughtful and meaningful ways.</textarea>
+    <button class="btn" style="margin-top: 12px;" onclick="saveAbout()">save about changes</button>
+</div>
+
+<!-- IMPORT/EXPORT -->
+<div class="io-section">
+    <h3>import / export</h3>
+    <div class="io-actions">
+        <label class="file-input-label" for="fileInput">load data.json</label>
+        <input type="file" id="fileInput" accept=".json">
+        <button class="btn btn-primary" onclick="exportJSON()">export data.json</button>
+    </div>
+</div>
+
+<!-- FORM OVERLAY -->
+<div class="form-overlay" id="formOverlay">
+    <div class="form-panel">
+        <h2 id="formTitle">add project</h2>
+        <div class="field-row">
+            <div class="field"><label>year</label><input id="f-year" placeholder="2025, ongoing, etc."></div>
+            <div class="field">
+                <label>categories (select multiple)</label>
+                <div class="category-checkboxes" id="f-categories"></div>
+            </div>
+        </div>
+        <div class="field"><label>title</label><input id="f-title"></div>
+        <div class="field-row">
+            <div class="field"><label>organisation</label><input id="f-org"></div>
+            <div class="field"><label>location</label><input id="f-location"></div>
+        </div>
+        <div class="field"><label>short description (hover preview)</label><input id="f-shortDesc" placeholder="one line overview"></div>
+        <div class="field"><label>full description (html ok)</label><textarea id="f-fullDesc" placeholder="&lt;p&gt;detailed write-up...&lt;/p&gt;"></textarea></div>
+        <div class="field"><label>project link (url)</label><input id="f-link" placeholder="https://..."></div>
+        <div class="field">
+            <label>media</label>
+            <div class="media-entries" id="mediaEntries"></div>
+            <button class="btn btn-sm" onclick="addMediaEntry()" style="margin-top: 6px;">+ add media</button>
+        </div>
+        <div class="field">
+            <label>events (exhibitions / performances / installations)</label>
+            <div class="events-entries" id="eventEntries"></div>
+            <button class="btn btn-sm" onclick="addEventEntry()" style="margin-top: 6px;">+ add event</button>
+        </div>
+        <div class="form-actions">
+            <button class="btn btn-primary" onclick="saveForm()">save</button>
+            <button class="btn" onclick="closeForm()">cancel</button>
+        </div>
+    </div>
+</div>
+
+<script>
+let data = { heroProjects: { upcoming: [], current: [], recent: [] }, work: [], lab: [], about: "" };
+let editMode = null;   // 'work' or 'lab'
+let editIndex = -1;    // -1 = new, >=0 = editing
+
+const ALL_CATEGORIES = [
+    'performance', 'installation', 'exhibition', 'collaboration', 'festival',
+    'curation', 'music', 'research', 'residency', 'web-residency', 'fellowship',
+    'film', 'theatre', 'podcast', 'sound-design', 'publication', 'talk', 'radio',
+    'education', 'workshop', 'masterclass', 'other'
+];
+
+function renderCategoryCheckboxes(selected = []) {
+    const container = document.getElementById('f-categories');
+    container.innerHTML = ALL_CATEGORIES.map(cat => {
+        const checked = selected.includes(cat);
+        return `<label class="cat-check${checked ? ' checked' : ''}">
+            <input type="checkbox" value="${cat}" ${checked ? 'checked' : ''}
+                onchange="this.parentElement.classList.toggle('checked', this.checked)"> ${cat}
+        </label>`;
+    }).join('');
+}
+
+function getSelectedCategories() {
+    return Array.from(document.querySelectorAll('#f-categories input[type=checkbox]:checked'))
+        .map(cb => cb.value);
+}
+
+// --- TABS ---
+document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
+    });
+});
+
+// --- LOAD / IMPORT ---
+document.getElementById('fileInput').addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+        try {
+            data = JSON.parse(ev.target.result);
+            renderAll();
+        } catch (err) { alert('Invalid JSON: ' + err.message); }
+    };
+    reader.readAsText(file);
+});
+
+// Auto-load data.json from same directory
+fetch('data.json')
+    .then(r => r.json())
+    .then(d => { data = d; renderAll(); })
+    .catch(() => {});
+
+// --- EXPORT ---
+function exportJSON() {
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'data.json';
+    a.click();
+    URL.revokeObjectURL(url);
+}
+
+// --- RENDER ALL ---
+function renderAll() {
+    renderList('work');
+    renderList('lab');
+    renderHeroEditor();
+    document.getElementById('aboutTextarea').value = data.about || '';
+}
+
+function renderList(type) {
+    const container = document.getElementById(type + 'List');
+    const items = type === 'work' ? data.work : data.lab;
+    container.innerHTML = '';
+    items.forEach((item, i) => {
+        const row = document.createElement('div');
+        row.className = 'item-row';
+        row.innerHTML = `
+            <div class="item-info">
+                <span class="item-year">${item.year}</span>
+                <strong>${item.title}</strong> — ${item.org}
+            </div>
+            <div class="item-actions">
+                <button class="btn btn-sm" onclick="editItem('${type}', ${i})">edit</button>
+                <button class="btn btn-sm btn-danger" onclick="deleteItem('${type}', ${i})">delete</button>
+            </div>
+        `;
+        container.appendChild(row);
+    });
+}
+
+// --- HERO EDITOR ---
+function renderHeroEditor() {
+    const container = document.getElementById('heroEditor');
+    container.innerHTML = '';
+    ['upcoming', 'current', 'recent'].forEach(cat => {
+        const group = document.createElement('div');
+        group.className = 'hero-group';
+        group.innerHTML = `<h3>${cat}</h3>`;
+        const items = data.heroProjects[cat] || [];
+        items.forEach((item, i) => {
+            const row = document.createElement('div');
+            row.className = 'hero-item';
+            row.innerHTML = `
+                <input value="${item.title}" placeholder="title" onchange="data.heroProjects['${cat}'][${i}].title=this.value">
+                <input value="${item.desc}" placeholder="description" onchange="data.heroProjects['${cat}'][${i}].desc=this.value">
+                <input value="${item.category}" placeholder="category" onchange="data.heroProjects['${cat}'][${i}].category=this.value">
+                <button class="btn btn-sm btn-danger" onclick="data.heroProjects['${cat}'].splice(${i},1);renderHeroEditor();">x</button>
+            `;
+            group.appendChild(row);
+        });
+        const addBtn = document.createElement('button');
+        addBtn.className = 'btn btn-sm';
+        addBtn.textContent = '+ add';
+        addBtn.onclick = () => { data.heroProjects[cat].push({ title: '', desc: '', category: '' }); renderHeroEditor(); };
+        group.appendChild(addBtn);
+        container.appendChild(group);
+    });
+}
+
+function saveHero() { alert('Hero changes saved in memory. Export data.json to persist.'); }
+
+// --- ABOUT ---
+function saveAbout() {
+    data.about = document.getElementById('aboutTextarea').value;
+    alert('About text saved in memory. Export data.json to persist.');
+}
+
+// --- FORM (Work / Lab) ---
+function openForm(type, index = -1) {
+    editMode = type;
+    editIndex = index;
+    const overlay = document.getElementById('formOverlay');
+    document.getElementById('formTitle').textContent = index >= 0 ? 'edit ' + type + ' item' : 'add ' + type + ' item';
+    
+    if (index >= 0) {
+        const item = type === 'work' ? data.work[index] : data.lab[index];
+        document.getElementById('f-year').value = item.year || '';
+        document.getElementById('f-title').value = item.title || '';
+        document.getElementById('f-org').value = item.org || '';
+        document.getElementById('f-location').value = item.location || '';
+        renderCategoryCheckboxes((item.categories || []).map(c => c.toLowerCase()));
+        document.getElementById('f-shortDesc').value = item.shortDesc || '';
+        document.getElementById('f-fullDesc').value = item.fullDesc || '';
+        document.getElementById('f-link').value = item.link || '';
+        renderMediaEntries(item.media || []);
+        renderEventEntries(item.events || []);
+    } else {
+        document.getElementById('f-year').value = '';
+        document.getElementById('f-title').value = '';
+        document.getElementById('f-org').value = '';
+        document.getElementById('f-location').value = '';
+        renderCategoryCheckboxes([]);
+        document.getElementById('f-shortDesc').value = '';
+        document.getElementById('f-fullDesc').value = '';
+        document.getElementById('f-link').value = '';
+        renderMediaEntries([]);
+        renderEventEntries([]);
+    }
+    overlay.classList.add('active');
+}
+
+function closeForm() {
+    document.getElementById('formOverlay').classList.remove('active');
+    editMode = null;
+    editIndex = -1;
+}
+
+function saveForm() {
+    const item = {
+        year: document.getElementById('f-year').value.trim(),
+        title: document.getElementById('f-title').value.trim(),
+        org: document.getElementById('f-org').value.trim(),
+        location: document.getElementById('f-location').value.trim(),
+        categories: getSelectedCategories(),
+        shortDesc: document.getElementById('f-shortDesc').value.trim(),
+        fullDesc: document.getElementById('f-fullDesc').value.trim(),
+        link: document.getElementById('f-link').value.trim(),
+        media: getMediaEntries(),
+        events: getEventEntries()
+    };
+
+    const list = editMode === 'work' ? data.work : data.lab;
+    if (editIndex >= 0) {
+        list[editIndex] = item;
+    } else {
+        list.push(item);
+    }
+    
+    closeForm();
+    renderAll();
+}
+
+function editItem(type, index) { openForm(type, index); }
+
+function deleteItem(type, index) {
+    if (!confirm('Delete this item?')) return;
+    const list = type === 'work' ? data.work : data.lab;
+    list.splice(index, 1);
+    renderAll();
+}
+
+// --- MEDIA ENTRIES ---
+function renderMediaEntries(media) {
+    const container = document.getElementById('mediaEntries');
+    container.innerHTML = '';
+    media.forEach((m, i) => addMediaEntry(m.type, m.url));
+}
+
+function addMediaEntry(type = 'image', url = '') {
+    const container = document.getElementById('mediaEntries');
+    const div = document.createElement('div');
+    div.className = 'media-entry';
+    div.innerHTML = `
+        <select>
+            <option value="image" ${type === 'image' ? 'selected' : ''}>image</option>
+            <option value="video" ${type === 'video' ? 'selected' : ''}>video</option>
+            <option value="audio" ${type === 'audio' ? 'selected' : ''}>audio</option>
+        </select>
+        <input value="${url}" placeholder="media/photo.jpg or https://embed-url...">
+        <button class="btn btn-sm btn-danger" onclick="this.parentElement.remove()">x</button>
+    `;
+    container.appendChild(div);
+}
+
+function getMediaEntries() {
+    const entries = [];
+    document.querySelectorAll('#mediaEntries .media-entry').forEach(row => {
+        const type = row.querySelector('select').value;
+        const url = row.querySelector('input').value.trim();
+        if (url) entries.push({ type, url });
+    });
+    return entries;
+}
+
+// --- EVENT ENTRIES ---
+function renderEventEntries(events) {
+    const container = document.getElementById('eventEntries');
+    container.innerHTML = '';
+    (events || []).forEach(ev => addEventEntry(ev));
+}
+
+function addEventEntry(evData) {
+    evData = evData || {};
+    const container = document.getElementById('eventEntries');
+    const div = document.createElement('div');
+    div.className = 'event-entry';
+    div.style.cssText = 'border: 1px solid var(--border); padding: 12px; margin-bottom: 8px;';
+    const esc = s => (s || '').replace(/"/g, '&quot;');
+    div.innerHTML = `
+        <div class="field-row">
+            <div class="field"><label>event title</label><input class="evt-title" value="${esc(evData.title)}" placeholder="exhibition name"></div>
+            <div class="field"><label>year</label><input class="evt-year" value="${esc(evData.year)}" placeholder="2025"></div>
+        </div>
+        <div class="field-row">
+            <div class="field"><label>place</label><input class="evt-place" value="${esc(evData.place)}" placeholder="Delhi, India"></div>
+            <div class="field"><label>organisation</label><input class="evt-org" value="${esc(evData.org)}" placeholder="Goethe Institut"></div>
+        </div>
+        <div class="field">
+            <label>event media</label>
+            <div class="evt-media-entries"></div>
+            <button class="btn btn-sm" onclick="addEvtMedia(this)">+ media</button>
+        </div>
+        <button class="btn btn-sm btn-danger" onclick="this.closest('.event-entry').remove()" style="margin-top: 6px;">remove event</button>
+    `;
+    container.appendChild(div);
+    if (evData.media && evData.media.length > 0) {
+        const mc = div.querySelector('.evt-media-entries');
+        evData.media.forEach(m => addEvtMediaTo(mc, m.type, m.url));
+    }
+}
+
+function addEvtMedia(btn) {
+    addEvtMediaTo(btn.previousElementSibling);
+}
+
+function addEvtMediaTo(container, type, url) {
+    type = type || 'image';
+    url = url || '';
+    const div = document.createElement('div');
+    div.className = 'media-entry';
+    div.innerHTML = `
+        <select>
+            <option value="image" ${type === 'image' ? 'selected' : ''}>image</option>
+            <option value="video" ${type === 'video' ? 'selected' : ''}>video</option>
+            <option value="audio" ${type === 'audio' ? 'selected' : ''}>audio</option>
+        </select>
+        <input value="${url}" placeholder="media/photo.jpg or https://...">
+        <button class="btn btn-sm btn-danger" onclick="this.parentElement.remove()">x</button>
+    `;
+    container.appendChild(div);
+}
+
+function getEventEntries() {
+    const events = [];
+    document.querySelectorAll('#eventEntries .event-entry').forEach(entry => {
+        const ev = {
+            title: entry.querySelector('.evt-title').value.trim(),
+            year: entry.querySelector('.evt-year').value.trim(),
+            place: entry.querySelector('.evt-place').value.trim(),
+            org: entry.querySelector('.evt-org').value.trim(),
+            media: []
+        };
+        entry.querySelectorAll('.evt-media-entries .media-entry').forEach(row => {
+            const type = row.querySelector('select').value;
+            const url = row.querySelector('input').value.trim();
+            if (url) ev.media.push({ type, url });
+        });
+        if (ev.title || ev.year || ev.place || ev.org) events.push(ev);
+    });
+    return events;
+}
+</script>
+
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+
+
+</body></html>
