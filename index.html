@@ -287,8 +287,30 @@
             .then(data => {
                 document.getElementById('about-container').textContent = data.about || 'No about data found.';
 
+                // Helper function to extract a sortable numerical value from the year string
+                const getSortValue = (yearStr) => {
+                    if (!yearStr) return 0;
+                    const lowerStr = String(yearStr).toLowerCase();
+                    
+                    // Prioritize "ongoing" items at the absolute top
+                    if (lowerStr.includes('ongoing') || lowerStr.includes('present')) return 9999;
+                    
+                    // Extract all 4-digit numbers (e.g., handles "2021-2023" by grabbing 2021 and 2023)
+                    const matches = String(yearStr).match(/\d{4}/g);
+                    if (matches) {
+                        // Return the highest year found so ranges sort by their completion date
+                        return Math.max(...matches.map(Number));
+                    }
+                    return 0;
+                };
+
                 const renderItems = (items, prefix) => {
-                    return (items || []).map((item, index) => {
+                    // Create a sorted copy of the array (newest to oldest)
+                    const sortedItems = (items || []).slice().sort((a, b) => {
+                        return getSortValue(b.year) - getSortValue(a.year);
+                    });
+
+                    return sortedItems.map((item, index) => {
                         const uniqueId = `${prefix}-${index}`;
                         const hasFullDesc = item.fullDesc && item.fullDesc.trim() !== "";
                         
